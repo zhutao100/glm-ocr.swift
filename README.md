@@ -4,15 +4,30 @@ Swift/MLX CLI for `zai-org/GLM-OCR`.
 
 ## Install
 
-Build the CLI (macOS):
+Download the prebuilt macOS CLI from the latest GitHub release:
+
+```bash
+curl -L -o glm-ocr.macos.arm64.zip \
+  https://github.com/mzbac/glm-ocr.swift/releases/latest/download/glm-ocr.macos.arm64.zip
+unzip -o glm-ocr.macos.arm64.zip
+export PATH="$PWD/glm-ocr.macos.arm64:$PATH"
+```
+
+Example pinned release (`v0.0.1`):
+
+```bash
+curl -L -o glm-ocr.macos.arm64.zip \
+  https://github.com/mzbac/glm-ocr.swift/releases/download/v0.0.1/glm-ocr.macos.arm64.zip
+unzip -o glm-ocr.macos.arm64.zip
+export PATH="$PWD/glm-ocr.macos.arm64:$PATH"
+```
+
+You can also browse release assets at [GitHub Releases](https://github.com/mzbac/glm-ocr.swift/releases/tag/v0.0.1).
+
+Build from source (alternative):
 
 ```bash
 xcodebuild -scheme GLMOCR-Package -destination "platform=macOS" -configuration Release -derivedDataPath build build
-```
-
-Make the built binary available on your `PATH` (for this shell):
-
-```bash
 export PATH="$PWD/build/Build/Products/Release:$PATH"
 ```
 
