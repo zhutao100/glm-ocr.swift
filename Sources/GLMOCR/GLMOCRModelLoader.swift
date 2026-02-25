@@ -4,11 +4,12 @@ import MLXNN
 
 enum GLMOCRModelLoader {
     static func load(from modelDirectory: URL, config: GLMOCRModelConfig, dtype: DType? = nil) throws -> GLMOCRForConditionalGeneration {
+        let resolvedURL = modelDirectory.resolvingSymlinksInPath()
         let model = GLMOCRForConditionalGeneration(config: config)
 
-        let safetensorFiles = try enumerateSafetensors(modelDirectory: modelDirectory)
+        let safetensorFiles = try enumerateSafetensors(modelDirectory: resolvedURL)
         guard !safetensorFiles.isEmpty else {
-            throw GLMOCRModelLoaderError.modelLoadFailed("No .safetensors files found under: \(modelDirectory.lastPathComponent)")
+            throw GLMOCRModelLoaderError.modelLoadFailed("No .safetensors files found under: \(resolvedURL.lastPathComponent)")
         }
 
         var weights: [String: MLXArray] = [:]

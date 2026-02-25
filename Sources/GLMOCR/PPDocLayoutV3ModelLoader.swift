@@ -4,15 +4,16 @@ import MLXNN
 
 enum PPDocLayoutV3ModelLoader {
     static func load(from modelDirectory: URL, dtype: DType? = nil) throws -> (model: PPDocLayoutV3ForObjectDetection, config: PPDocLayoutV3Config) {
-        let configURL = modelDirectory.appendingPathComponent("config.json")
+        let resolvedURL = modelDirectory.resolvingSymlinksInPath()
+        let configURL = resolvedURL.appendingPathComponent("config.json")
         let data = try Data(contentsOf: configURL)
         let config = try JSONDecoder().decode(PPDocLayoutV3Config.self, from: data)
 
         let model = PPDocLayoutV3ForObjectDetection(config: config)
 
-        let safetensorFiles = try enumerateSafetensors(modelDirectory: modelDirectory)
+        let safetensorFiles = try enumerateSafetensors(modelDirectory: resolvedURL)
         guard !safetensorFiles.isEmpty else {
-            throw PPDocLayoutV3ModelLoaderError.modelLoadFailed("No .safetensors files found under: \(modelDirectory.lastPathComponent)")
+            throw PPDocLayoutV3ModelLoaderError.modelLoadFailed("No .safetensors files found under: \(resolvedURL.lastPathComponent)")
         }
 
         var weights: [String: MLXArray] = [:]
