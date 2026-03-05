@@ -3,13 +3,16 @@ import MLX
 import MLXNN
 
 enum GLMOCRModelLoader {
-    static func load(from modelDirectory: URL, config: GLMOCRModelConfig, dtype: DType? = nil) throws -> GLMOCRForConditionalGeneration {
+    static func load(from modelDirectory: URL, config: GLMOCRModelConfig, dtype: DType? = nil) throws
+        -> GLMOCRForConditionalGeneration
+    {
         let resolvedURL = modelDirectory.resolvingSymlinksInPath()
         let model = GLMOCRForConditionalGeneration(config: config)
 
         let safetensorFiles = try enumerateSafetensors(modelDirectory: resolvedURL)
         guard !safetensorFiles.isEmpty else {
-            throw GLMOCRModelLoaderError.modelLoadFailed("No .safetensors files found under: \(resolvedURL.lastPathComponent)")
+            throw GLMOCRModelLoaderError.modelLoadFailed(
+                "No .safetensors files found under: \(resolvedURL.lastPathComponent)")
         }
 
         var weights: [String: MLXArray] = [:]
@@ -41,11 +44,14 @@ enum GLMOCRModelLoader {
     }
 
     private static func enumerateSafetensors(modelDirectory: URL) throws -> [URL] {
-        guard let enumerator = FileManager.default.enumerator(
-            at: modelDirectory,
-            includingPropertiesForKeys: nil
-        ) else {
-            throw GLMOCRModelLoaderError.modelLoadFailed("Failed to enumerate model directory: \(modelDirectory.lastPathComponent)")
+        guard
+            let enumerator = FileManager.default.enumerator(
+                at: modelDirectory,
+                includingPropertiesForKeys: nil
+            )
+        else {
+            throw GLMOCRModelLoaderError.modelLoadFailed(
+                "Failed to enumerate model directory: \(modelDirectory.lastPathComponent)")
         }
 
         var safetensorFiles: [URL] = []
@@ -76,7 +82,9 @@ enum GLMOCRModelLoader {
         return out
     }
 
-    private static func filterUnsupportedLayers(_ weights: [String: MLXArray], config: GLMOCRModelConfig) -> [String: MLXArray] {
+    private static func filterUnsupportedLayers(_ weights: [String: MLXArray], config: GLMOCRModelConfig) -> [String:
+        MLXArray]
+    {
         var out: [String: MLXArray] = [:]
         out.reserveCapacity(weights.count)
 

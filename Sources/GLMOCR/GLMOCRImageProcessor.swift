@@ -1,5 +1,5 @@
-import CoreImage
 import CoreGraphics
+import CoreImage
 import Foundation
 import ImageIO
 import MLX
@@ -28,7 +28,9 @@ public struct GLMOCRImageProcessor {
         }
     }
 
-    public func process(imageAt url: URL, postResizeJPEGRoundTripQuality: Double? = nil) throws -> GLMOCRPreprocessedImage {
+    public func process(imageAt url: URL, postResizeJPEGRoundTripQuality: Double? = nil) throws
+        -> GLMOCRPreprocessedImage
+    {
         let image = try Self.loadCGImage(from: url)
         return try process(image, postResizeJPEGRoundTripQuality: postResizeJPEGRoundTripQuality)
     }
@@ -173,7 +175,7 @@ public struct GLMOCRImageProcessor {
         let chunkSize = Self.batchChunkSize(imageCount: imageCount)
         let chunkCount = (imageCount + chunkSize - 1) / chunkSize
 
-        var stage1Results = Array<BatchStage1Result?>(repeating: nil, count: imageCount)
+        var stage1Results = [BatchStage1Result?](repeating: nil, count: imageCount)
         stage1Results.withUnsafeMutableBufferPointer { results in
             guard let resultsBase = results.baseAddress else {
                 return
@@ -188,7 +190,7 @@ public struct GLMOCRImageProcessor {
 
                 DispatchQueue.concurrentPerform(iterations: chunkCount) { chunkIndex in
                     guard let resultsBase = UnsafeMutablePointer<BatchStage1Result?>(bitPattern: resultsBaseAddress),
-                          let imageBase = UnsafePointer<CGImage>(bitPattern: imageBaseAddress)
+                        let imageBase = UnsafePointer<CGImage>(bitPattern: imageBaseAddress)
                     else {
                         return
                     }
@@ -240,9 +242,10 @@ public struct GLMOCRImageProcessor {
 
     private static func loadCGImage(from url: URL) throws -> CGImage {
         guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
-              let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
+            let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
         else {
-            throw GLMOCRImageProcessorError.imageLoadFailed(url.lastPathComponent.isEmpty ? "image" : url.lastPathComponent)
+            throw GLMOCRImageProcessorError.imageLoadFailed(
+                url.lastPathComponent.isEmpty ? "image" : url.lastPathComponent)
         }
         return image
     }
@@ -256,7 +259,7 @@ public struct GLMOCRImageProcessor {
         let chunkSize = batchChunkSize(imageCount: imageCount)
         let chunkCount = (imageCount + chunkSize - 1) / chunkSize
 
-        var loadResults = Array<BatchImageLoadResult?>(repeating: nil, count: imageCount)
+        var loadResults = [BatchImageLoadResult?](repeating: nil, count: imageCount)
         loadResults.withUnsafeMutableBufferPointer { results in
             guard let resultsBase = results.baseAddress else {
                 return
@@ -264,7 +267,8 @@ public struct GLMOCRImageProcessor {
             let resultsBaseAddress = Int(bitPattern: resultsBase)
 
             DispatchQueue.concurrentPerform(iterations: chunkCount) { chunkIndex in
-                guard let resultsBase = UnsafeMutablePointer<BatchImageLoadResult?>(bitPattern: resultsBaseAddress) else {
+                guard let resultsBase = UnsafeMutablePointer<BatchImageLoadResult?>(bitPattern: resultsBaseAddress)
+                else {
                     return
                 }
 
@@ -370,7 +374,7 @@ public struct GLMOCRImageProcessor {
         let image = try makeRGBAImage(width: width, height: height, rgba: rgba)
         let jpegData = try encodeJPEGData(image, quality: quality)
         guard let source = CGImageSourceCreateWithData(jpegData as CFData, nil),
-              let decodedImage = CGImageSourceCreateImageAtIndex(source, 0, nil)
+            let decodedImage = CGImageSourceCreateImageAtIndex(source, 0, nil)
         else {
             throw GLMOCRImageProcessorError.jpegRoundTripFailed
         }
@@ -391,7 +395,7 @@ public struct GLMOCRImageProcessor {
         try rgba.withUnsafeMutableBytes { dstPtr in
             try rgb.withUnsafeBytes { srcPtr in
                 guard let dstBase = dstPtr.bindMemory(to: UInt8.self).baseAddress,
-                      let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
+                    let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
                 else { throw GLMOCRImageProcessorError.jpegRoundTripFailed }
                 var srcIndex = 0
                 var dstIndex = 0
@@ -417,7 +421,7 @@ public struct GLMOCRImageProcessor {
         try rgb.withUnsafeMutableBytes { dstPtr in
             try rgba.withUnsafeBytes { srcPtr in
                 guard let dstBase = dstPtr.bindMemory(to: UInt8.self).baseAddress,
-                      let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
+                    let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
                 else { throw GLMOCRImageProcessorError.jpegRoundTripFailed }
                 var srcIndex = 0
                 var dstIndex = 0
@@ -442,24 +446,26 @@ public struct GLMOCRImageProcessor {
             throw GLMOCRImageProcessorError.jpegRoundTripFailed
         }
         guard let provider = CGDataProvider(data: rgba as CFData),
-              let colorSpace = CGColorSpace(name: CGColorSpace.sRGB)
+            let colorSpace = CGColorSpace(name: CGColorSpace.sRGB)
         else {
             throw GLMOCRImageProcessorError.jpegRoundTripFailed
         }
         let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
-        guard let image = CGImage(
-            width: width,
-            height: height,
-            bitsPerComponent: 8,
-            bitsPerPixel: 32,
-            bytesPerRow: bytesPerRow,
-            space: colorSpace,
-            bitmapInfo: CGBitmapInfo(rawValue: bitmapInfo),
-            provider: provider,
-            decode: nil,
-            shouldInterpolate: false,
-            intent: .defaultIntent
-        ) else {
+        guard
+            let image = CGImage(
+                width: width,
+                height: height,
+                bitsPerComponent: 8,
+                bitsPerPixel: 32,
+                bytesPerRow: bytesPerRow,
+                space: colorSpace,
+                bitmapInfo: CGBitmapInfo(rawValue: bitmapInfo),
+                provider: provider,
+                decode: nil,
+                shouldInterpolate: false,
+                intent: .defaultIntent
+            )
+        else {
             throw GLMOCRImageProcessorError.jpegRoundTripFailed
         }
         return image
@@ -468,12 +474,14 @@ public struct GLMOCRImageProcessor {
     private static func encodeJPEGData(_ image: CGImage, quality: Double) throws -> Data {
         let clampedQuality = max(0.0, min(quality, 1.0))
         let data = NSMutableData()
-        guard let destination = CGImageDestinationCreateWithData(
-            data,
-            UTType.jpeg.identifier as CFString,
-            1,
-            nil
-        ) else {
+        guard
+            let destination = CGImageDestinationCreateWithData(
+                data,
+                UTType.jpeg.identifier as CFString,
+                1,
+                nil
+            )
+        else {
             throw GLMOCRImageProcessorError.jpegRoundTripFailed
         }
         let options = [kCGImageDestinationLossyCompressionQuality: clampedQuality] as CFDictionary
@@ -549,15 +557,17 @@ public struct GLMOCRImageProcessor {
             }
 
             let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
-            guard let context = CGContext(
-                data: baseAddress,
-                width: width,
-                height: height,
-                bitsPerComponent: 8,
-                bytesPerRow: bytesPerRow,
-                space: colorSpace,
-                bitmapInfo: bitmapInfo
-            ) else {
+            guard
+                let context = CGContext(
+                    data: baseAddress,
+                    width: width,
+                    height: height,
+                    bitsPerComponent: 8,
+                    bytesPerRow: bytesPerRow,
+                    space: colorSpace,
+                    bitmapInfo: bitmapInfo
+                )
+            else {
                 throw GLMOCRImageProcessorError.bitmapAllocationFailed
             }
 
@@ -641,7 +651,7 @@ public struct GLMOCRImageProcessor {
             out.withUnsafeMutableBytes { outPtr in
                 rgba.withUnsafeBytes { srcPtr in
                     guard let outBase = outPtr.bindMemory(to: UInt8.self).baseAddress,
-                          let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
+                        let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
                     else { return }
 
                     var dstIndex = 0
@@ -666,7 +676,7 @@ public struct GLMOCRImageProcessor {
         try out.withUnsafeMutableBytes { outPtr in
             try rgba.withUnsafeBytes { srcPtr in
                 guard let outBase = outPtr.bindMemory(to: UInt8.self).baseAddress,
-                      let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
+                    let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
                 else {
                     throw GLMOCRImageProcessorError.resizeFailed
                 }
@@ -707,10 +717,9 @@ public struct GLMOCRImageProcessor {
                 let outBaseAddress = Int(bitPattern: outBase)
                 let srcBaseAddress = Int(bitPattern: srcBase)
 
-                let shouldParallelize = (
-                    ProcessInfo.processInfo.activeProcessorCount >= 4
-                        && (dstWidth * dstHeight) >= 1_000_000
-                )
+                let shouldParallelize =
+                    (ProcessInfo.processInfo.activeProcessorCount >= 4
+                        && (dstWidth * dstHeight) >= 1_000_000)
 
                 if !shouldParallelize {
                     let rowCacheSize = 8
@@ -757,7 +766,7 @@ public struct GLMOCRImageProcessor {
 
                     DispatchQueue.concurrentPerform(iterations: chunkCount) { chunkIndex in
                         guard let outBase = UnsafeMutablePointer<UInt8>(bitPattern: outBaseAddress),
-                              let srcBase = UnsafePointer<UInt8>(bitPattern: srcBaseAddress)
+                            let srcBase = UnsafePointer<UInt8>(bitPattern: srcBaseAddress)
                         else {
                             return
                         }
@@ -856,7 +865,8 @@ public struct GLMOCRImageProcessor {
         maxPixels: Int
     ) throws -> (height: Int, width: Int) {
         guard numFrames >= temporalFactor else {
-            throw GLMOCRImageProcessorError.invalidTemporalArguments(numFrames: numFrames, temporalFactor: temporalFactor)
+            throw GLMOCRImageProcessorError.invalidTemporalArguments(
+                numFrames: numFrames, temporalFactor: temporalFactor)
         }
 
         var height = height
@@ -873,7 +883,6 @@ public struct GLMOCRImageProcessor {
             throw GLMOCRImageProcessorError.invalidAspectRatio(aspectRatio)
         }
 
-        
         var hBar = Int((Double(height) / Double(factor)).rounded(.toNearestOrEven)) * factor
         var wBar = Int((Double(width) / Double(factor)).rounded(.toNearestOrEven)) * factor
         let tBar = Int((Double(numFrames) / Double(temporalFactor)).rounded(.toNearestOrEven)) * temporalFactor

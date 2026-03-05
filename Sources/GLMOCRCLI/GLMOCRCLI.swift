@@ -149,7 +149,7 @@ struct GLMOCRCLI: AsyncParsableCommand {
             if batchSize < 0 {
                 throw ValidationError("--batch-size must be >= 0.")
             }
-            if let postResizeJpegQuality, (postResizeJpegQuality < 0.0 || postResizeJpegQuality > 1.0) {
+            if let postResizeJpegQuality, postResizeJpegQuality < 0.0 || postResizeJpegQuality > 1.0 {
                 throw ValidationError("--post-resize-jpeg-quality must be between 0 and 1.")
             }
             try await GLMOCRCLI.withExecutionDevice {
@@ -215,7 +215,9 @@ struct GLMOCRCLI: AsyncParsableCommand {
         )
         var inputs: [String] = []
 
-        @Option(name: [.customLong("output-dir")], help: "Parse output directory containing <stem>/{result.md,result.json}.")
+        @Option(
+            name: [.customLong("output-dir")], help: "Parse output directory containing <stem>/{result.md,result.json}."
+        )
         var outputDir: String = "outputs/parse"
 
         @Option(
@@ -251,7 +253,9 @@ struct GLMOCRCLI: AsyncParsableCommand {
         )
         var maxNewTokensFormula: Int?
 
-        @Flag(name: [.customLong("include-formula-numbers")], help: "OCR formula number regions and merge them into formulas.")
+        @Flag(
+            name: [.customLong("include-formula-numbers")],
+            help: "OCR formula number regions and merge them into formulas.")
         var includeFormulaNumbers: Bool = false
 
         @Option(
@@ -428,7 +432,8 @@ struct GLMOCRCLI: AsyncParsableCommand {
         let fm = FileManager.default
         let allowedExtensions = Set(["png", "jpg", "jpeg", "webp", "tif", "tiff", "bmp", "pdf"])
 
-        let trimmedInputs = inputs
+        let trimmedInputs =
+            inputs
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
         guard !trimmedInputs.isEmpty else {
@@ -446,7 +451,8 @@ struct GLMOCRCLI: AsyncParsableCommand {
             if isDirectory.boolValue {
                 let dirURL = URL(fileURLWithPath: expanded).standardizedFileURL
                 let contents = try fm.contentsOfDirectory(at: dirURL, includingPropertiesForKeys: nil)
-                let imageURLs = contents
+                let imageURLs =
+                    contents
                     .filter { allowedExtensions.contains($0.pathExtension.lowercased()) }
                     .sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
                 guard !imageURLs.isEmpty else {
@@ -753,7 +759,7 @@ struct GLMOCRCLI: AsyncParsableCommand {
 private func loadCGImage(at path: String) throws -> CGImage {
     let url = URL(fileURLWithPath: path)
     guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
-          let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
+        let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
     else {
         throw ValidationError("Failed to decode image \(url.lastPathComponent).")
     }
@@ -803,15 +809,17 @@ private func loadCGImagesFromPDF(at url: URL, dpi: CGFloat, maxPages: Int?) thro
         }
 
         let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
-        guard let context = CGContext(
-            data: nil,
-            width: width,
-            height: height,
-            bitsPerComponent: 8,
-            bytesPerRow: width * 4,
-            space: colorSpace,
-            bitmapInfo: bitmapInfo
-        ) else {
+        guard
+            let context = CGContext(
+                data: nil,
+                width: width,
+                height: height,
+                bitsPerComponent: 8,
+                bytesPerRow: width * 4,
+                space: colorSpace,
+                bitmapInfo: bitmapInfo
+            )
+        else {
             throw ValidationError("Failed to create PDF render context.")
         }
 
@@ -836,7 +844,7 @@ private func loadCGImagesFromPDF(at url: URL, dpi: CGFloat, maxPages: Int?) thro
         pages.append(image)
 
         if pagesToRender > 1,
-           pageIndex == 1 || pageIndex == pagesToRender || pageIndex.isMultiple(of: 5)
+            pageIndex == 1 || pageIndex == pagesToRender || pageIndex.isMultiple(of: 5)
         {
             eprintln("rendered page \(pageIndex)/\(pagesToRender)")
         }

@@ -3,7 +3,9 @@ import MLX
 import MLXNN
 
 enum PPDocLayoutV3ModelLoader {
-    static func load(from modelDirectory: URL, dtype: DType? = nil) throws -> (model: PPDocLayoutV3ForObjectDetection, config: PPDocLayoutV3Config) {
+    static func load(from modelDirectory: URL, dtype: DType? = nil) throws -> (
+        model: PPDocLayoutV3ForObjectDetection, config: PPDocLayoutV3Config
+    ) {
         let resolvedURL = modelDirectory.resolvingSymlinksInPath()
         let configURL = resolvedURL.appendingPathComponent("config.json")
         let data = try Data(contentsOf: configURL)
@@ -13,7 +15,8 @@ enum PPDocLayoutV3ModelLoader {
 
         let safetensorFiles = try enumerateSafetensors(modelDirectory: resolvedURL)
         guard !safetensorFiles.isEmpty else {
-            throw PPDocLayoutV3ModelLoaderError.modelLoadFailed("No .safetensors files found under: \(resolvedURL.lastPathComponent)")
+            throw PPDocLayoutV3ModelLoaderError.modelLoadFailed(
+                "No .safetensors files found under: \(resolvedURL.lastPathComponent)")
         }
 
         var weights: [String: MLXArray] = [:]
@@ -48,11 +51,14 @@ enum PPDocLayoutV3ModelLoader {
     }
 
     private static func enumerateSafetensors(modelDirectory: URL) throws -> [URL] {
-        guard let enumerator = FileManager.default.enumerator(
-            at: modelDirectory,
-            includingPropertiesForKeys: nil
-        ) else {
-            throw PPDocLayoutV3ModelLoaderError.modelLoadFailed("Failed to enumerate model directory: \(modelDirectory.lastPathComponent)")
+        guard
+            let enumerator = FileManager.default.enumerator(
+                at: modelDirectory,
+                includingPropertiesForKeys: nil
+            )
+        else {
+            throw PPDocLayoutV3ModelLoaderError.modelLoadFailed(
+                "Failed to enumerate model directory: \(modelDirectory.lastPathComponent)")
         }
 
         var safetensorFiles: [URL] = []
@@ -88,7 +94,7 @@ enum PPDocLayoutV3ModelLoader {
         out.reserveCapacity(weights.count)
 
         for (key, value) in weights {
-            
+
             if value.ndim == 4, key.hasSuffix(".weight") {
                 out[key] = value.transposed(0, 2, 3, 1)
             } else {
@@ -100,13 +106,10 @@ enum PPDocLayoutV3ModelLoader {
     }
 
     private static func rewriteConvBNKeys(_ weights: [String: MLXArray]) -> [String: MLXArray] {
-        
-        
-        
-        
+
         func rewrite(_ key: String) -> String {
             let parts = key.split(separator: ".", omittingEmptySubsequences: false)
-            
+
             guard parts.count >= 5 else { return key }
             guard parts[0] == "model" else { return key }
             guard parts[1] == "encoder_input_proj" || parts[1] == "decoder_input_proj" else { return key }
@@ -149,28 +152,26 @@ enum PPDocLayoutV3ModelLoader {
         func rewrite(_ key: String) -> String {
             let parts = key.split(separator: ".", omittingEmptySubsequences: false)
 
-            
             if parts.count >= 6,
-               parts[0] == "model",
-               parts[1] == "decoder",
-               parts[2] == "layers",
-               isInt(parts[3]),
-               (parts[4] == "fc1" || parts[4] == "fc2")
+                parts[0] == "model",
+                parts[1] == "decoder",
+                parts[2] == "layers",
+                isInt(parts[3]),
+                parts[4] == "fc1" || parts[4] == "fc2"
             {
                 var newParts = parts.map(String.init)
                 newParts.insert("mlp", at: 4)
                 return newParts.joined(separator: ".")
             }
 
-            
             if parts.count >= 8,
-               parts[0] == "model",
-               parts[1] == "encoder",
-               parts[2] == "aifi",
-               isInt(parts[3]),
-               parts[4] == "layers",
-               isInt(parts[5]),
-               (parts[6] == "fc1" || parts[6] == "fc2")
+                parts[0] == "model",
+                parts[1] == "encoder",
+                parts[2] == "aifi",
+                isInt(parts[3]),
+                parts[4] == "layers",
+                isInt(parts[5]),
+                parts[6] == "fc1" || parts[6] == "fc2"
             {
                 var newParts = parts.map(String.init)
                 newParts.insert("mlp", at: 6)

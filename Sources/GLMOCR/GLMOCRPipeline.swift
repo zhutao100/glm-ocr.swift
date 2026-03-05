@@ -1,7 +1,7 @@
+import CoreGraphics
 import Foundation
 import MLX
 import Tokenizers
-import CoreGraphics
 
 public final class GLMOCRPipeline {
     public let resources: GLMOCRResources
@@ -23,7 +23,8 @@ public final class GLMOCRPipeline {
     public func loadModel(dtype: MLX.DType? = nil) throws {
         if model != nil { return }
         try withGPUDevice {
-            model = try GLMOCRModelLoader.load(from: resources.modelURL, config: resources.modelConfig, dtype: dtype ?? .float16)
+            model = try GLMOCRModelLoader.load(
+                from: resources.modelURL, config: resources.modelConfig, dtype: dtype ?? .float16)
         }
     }
 
@@ -319,11 +320,10 @@ public final class GLMOCRPipeline {
 
         var outputs = Array(repeating: "", count: batch)
 
-        let needsMicrobatchSeedDerivation = (
-            parameters.temperature > 0
+        let needsMicrobatchSeedDerivation =
+            (parameters.temperature > 0
                 && parameters.seed != nil
-                && microbatches.count > 1
-        )
+                && microbatches.count > 1)
 
         for (microbatchIndex, microbatch) in microbatches.enumerated() {
             let microItems = microbatch.map { items[$0] }

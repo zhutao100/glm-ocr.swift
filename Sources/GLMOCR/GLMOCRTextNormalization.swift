@@ -4,12 +4,10 @@ public enum GLMOCRTextNormalization {
     public static func cleanContent(_ input: String?) -> String {
         guard var content = input else { return "" }
 
-        
         while content.hasPrefix("\\t") { content = String(content.dropFirst(2)) }
         while content.hasSuffix("\\t") { content = String(content.dropLast(2)) }
         content = content.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        
         content = content.replacingOccurrences(of: #"(\.)\1{2,}"#, with: "$1$1$1", options: [.regularExpression])
         content = content.replacingOccurrences(of: #"(·)\1{2,}"#, with: "$1$1$1", options: [.regularExpression])
         content = content.replacingOccurrences(of: #"(_)\1{2,}"#, with: "$1$1$1", options: [.regularExpression])
@@ -100,12 +98,13 @@ public enum GLMOCRTextNormalization {
         guard !stripped.isEmpty else { return content }
 
         if stripped.count > minLen * minRepeats,
-           let repeatCleaned = findConsecutiveRepeat(stripped, minUnitLen: minLen, minRepeats: minRepeats)
+            let repeatCleaned = findConsecutiveRepeat(stripped, minUnitLen: minLen, minRepeats: minRepeats)
         {
             return repeatCleaned
         }
 
-        let lines = content
+        let lines =
+            content
             .split(separator: "\n", omittingEmptySubsequences: false)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
@@ -150,17 +149,19 @@ public enum GLMOCRTextNormalization {
         guard maxUnitLen >= minUnitLen else { return nil }
 
         let pattern = "(.{\(minUnitLen),\(maxUnitLen)}?)\\\\1{\(minRepeats - 1),}"
-        guard let regex = try? NSRegularExpression(
-            pattern: pattern,
-            options: [.dotMatchesLineSeparators]
-        ) else {
+        guard
+            let regex = try? NSRegularExpression(
+                pattern: pattern,
+                options: [.dotMatchesLineSeparators]
+            )
+        else {
             return nil
         }
 
         let ns = string as NSString
         let range = NSRange(location: 0, length: ns.length)
         guard let match = regex.firstMatch(in: string, options: [], range: range),
-              match.numberOfRanges >= 2
+            match.numberOfRanges >= 2
         else {
             return nil
         }

@@ -56,7 +56,9 @@ public struct PPDocLayoutV3ImageProcessor: Sendable {
         }
     }
 
-    private func decodeAndResizeRGB(image: CGImage) throws -> (resizedRGB: Data, originalWidth: Int, originalHeight: Int) {
+    private func decodeAndResizeRGB(image: CGImage) throws -> (
+        resizedRGB: Data, originalWidth: Int, originalHeight: Int
+    ) {
         let originalWidth = image.width
         let originalHeight = image.height
         guard originalWidth > 0, originalHeight > 0 else {
@@ -90,12 +92,17 @@ public struct PPDocLayoutV3ImageProcessor: Sendable {
         )
     }
 
-    public func process(_ images: [CGImage]) throws -> (pixelValues: MLXArray, originalSizes: [(width: Int, height: Int)]) {
+    public func process(_ images: [CGImage]) throws -> (
+        pixelValues: MLXArray, originalSizes: [(width: Int, height: Int)]
+    ) {
         precondition(!images.isEmpty, "images must be non-empty")
 
         if images.count == 1 {
             let processed = try process(images[0])
-            return (pixelValues: processed.pixelValues, originalSizes: [(width: processed.originalWidth, height: processed.originalHeight)])
+            return (
+                pixelValues: processed.pixelValues,
+                originalSizes: [(width: processed.originalWidth, height: processed.originalHeight)]
+            )
         }
 
         let state = SharedResizeState(count: images.count)
@@ -148,9 +155,10 @@ public struct PPDocLayoutV3ImageProcessor: Sendable {
         let expanded = (path as NSString).expandingTildeInPath
         let url = URL(fileURLWithPath: expanded)
         guard let source = CGImageSourceCreateWithURL(url as CFURL, nil),
-              let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
+            let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
         else {
-            throw PPDocLayoutV3ImageProcessorError.imageLoadFailed(url.lastPathComponent.isEmpty ? "image" : url.lastPathComponent)
+            throw PPDocLayoutV3ImageProcessorError.imageLoadFailed(
+                url.lastPathComponent.isEmpty ? "image" : url.lastPathComponent)
         }
         return try process(image)
     }
@@ -188,15 +196,17 @@ public struct PPDocLayoutV3ImageProcessor: Sendable {
             }
 
             let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
-            guard let context = CGContext(
-                data: baseAddress,
-                width: width,
-                height: height,
-                bitsPerComponent: 8,
-                bytesPerRow: bytesPerRow,
-                space: colorSpace,
-                bitmapInfo: bitmapInfo
-            ) else {
+            guard
+                let context = CGContext(
+                    data: baseAddress,
+                    width: width,
+                    height: height,
+                    bitsPerComponent: 8,
+                    bytesPerRow: bytesPerRow,
+                    space: colorSpace,
+                    bitmapInfo: bitmapInfo
+                )
+            else {
                 throw PPDocLayoutV3ImageProcessorError.contextCreateFailed
             }
 
@@ -208,7 +218,7 @@ public struct PPDocLayoutV3ImageProcessor: Sendable {
     }
 
     private func cubicKernel(_ x: Double) -> Double {
-        
+
         let a = -0.75
         let ax = abs(x)
         if ax <= 1 {
@@ -271,7 +281,7 @@ public struct PPDocLayoutV3ImageProcessor: Sendable {
             out.withUnsafeMutableBytes { outPtr in
                 rgba.withUnsafeBytes { srcPtr in
                     guard let outBase = outPtr.bindMemory(to: UInt8.self).baseAddress,
-                          let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
+                        let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
                     else { return }
 
                     var dstIndex = 0
@@ -296,7 +306,7 @@ public struct PPDocLayoutV3ImageProcessor: Sendable {
         try out.withUnsafeMutableBytes { outPtr in
             try rgba.withUnsafeBytes { srcPtr in
                 guard let outBase = outPtr.bindMemory(to: UInt8.self).baseAddress,
-                      let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
+                    let srcBase = srcPtr.bindMemory(to: UInt8.self).baseAddress
                 else {
                     throw PPDocLayoutV3ImageProcessorError.resizeFailed
                 }

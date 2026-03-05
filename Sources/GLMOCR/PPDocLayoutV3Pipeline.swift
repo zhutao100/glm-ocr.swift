@@ -216,7 +216,8 @@ public final class PPDocLayoutV3Pipeline {
         }
 
         let needMasks = includeMasks || includePolygons
-        let (maskH, maskW): (Int, Int) = needMasks
+        let (maskH, maskW): (Int, Int) =
+            needMasks
             ? (outputs.outMasks.dim(2), outputs.outMasks.dim(3))
             : (0, 0)
         let maskPlaneSize = maskH * maskW
@@ -252,7 +253,7 @@ public final class PPDocLayoutV3Pipeline {
                     keptQueryIndices.append(queryIndexCPU[base + i])
                 }
 
-                let masksB = outputs.outMasks[b ..< b + 1, 0..., 0..., 0...]
+                let masksB = outputs.outMasks[b..<b + 1, 0..., 0..., 0...]
                 let keepCount = keepIndices.count
                 let maskIndices = MLXArray(keptQueryIndices).reshaped(1, keepCount, 1, 1)
                 let maskIndicesBroadcast = broadcast(maskIndices, to: [1, keepCount, maskH, maskW])
@@ -296,12 +297,14 @@ public final class PPDocLayoutV3Pipeline {
                 let y2 = clampInt(Int(y2f), 0, imageSize.height)
 
                 let boxCoordinates = [Double(x1), Double(y1), Double(x2), Double(y2)]
-                let rectPolygon: [[Double]]? = includePolygons ? [
-                    [Double(x1), Double(y1)],
-                    [Double(x2), Double(y1)],
-                    [Double(x2), Double(y2)],
-                    [Double(x1), Double(y2)],
-                ] : nil
+                let rectPolygon: [[Double]]? =
+                    includePolygons
+                    ? [
+                        [Double(x1), Double(y1)],
+                        [Double(x2), Double(y1)],
+                        [Double(x2), Double(y2)],
+                        [Double(x1), Double(y2)],
+                    ] : nil
 
                 let polygon: [[Double]]?
                 let maskValue: PPDocLayoutV3Mask?

@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import GLMOCR
 
 final class GLMOCRPolygonMaskRasterizerTests: XCTestCase {
@@ -37,7 +38,7 @@ final class GLMOCRPolygonMaskRasterizerTests: XCTestCase {
             1, 1, 1, 0,
             1, 1, 1, 0,
             1, 1, 1, 0,
-            0, 0, 0, 0
+            0, 0, 0, 0,
         ]
 
         XCTAssertEqual(mask, expected)

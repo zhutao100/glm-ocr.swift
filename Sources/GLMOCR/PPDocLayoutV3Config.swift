@@ -109,8 +109,10 @@ public struct PPDocLayoutV3Config: Decodable, Sendable {
         dropout = try container.decodeIfPresent(Float.self, forKey: .dropout) ?? 0.0
         activationDropout = try container.decodeIfPresent(Float.self, forKey: .activationDropout) ?? 0.0
         encodeProjLayers = try container.decodeIfPresent([Int].self, forKey: .encodeProjLayers) ?? [2]
-        positionalEncodingTemperature = try container.decodeIfPresent(Int.self, forKey: .positionalEncodingTemperature) ?? 10_000
-        encoderActivationFunction = try container.decodeIfPresent(String.self, forKey: .encoderActivationFunction) ?? "gelu"
+        positionalEncodingTemperature =
+            try container.decodeIfPresent(Int.self, forKey: .positionalEncodingTemperature) ?? 10_000
+        encoderActivationFunction =
+            try container.decodeIfPresent(String.self, forKey: .encoderActivationFunction) ?? "gelu"
         activationFunction = try container.decodeIfPresent(String.self, forKey: .activationFunction) ?? "silu"
         evalSize = try container.decodeIfPresent([Int].self, forKey: .evalSize)
         normalizeBefore = try container.decodeIfPresent(Bool.self, forKey: .normalizeBefore) ?? false
@@ -128,7 +130,8 @@ public struct PPDocLayoutV3Config: Decodable, Sendable {
         decoderNPoints = try container.decodeIfPresent(Int.self, forKey: .decoderNPoints) ?? 4
         decoderLayers = try container.decodeIfPresent(Int.self, forKey: .decoderLayers) ?? 6
         decoderAttentionHeads = try container.decodeIfPresent(Int.self, forKey: .decoderAttentionHeads) ?? 8
-        decoderActivationFunction = try container.decodeIfPresent(String.self, forKey: .decoderActivationFunction) ?? "relu"
+        decoderActivationFunction =
+            try container.decodeIfPresent(String.self, forKey: .decoderActivationFunction) ?? "relu"
         attentionDropout = try container.decodeIfPresent(Float.self, forKey: .attentionDropout) ?? 0.0
         learnInitialQuery = try container.decodeIfPresent(Bool.self, forKey: .learnInitialQuery) ?? false
         anchorImageSize = try container.decodeIfPresent([Int].self, forKey: .anchorImageSize)
@@ -150,4 +153,3 @@ public struct PPDocLayoutV3Config: Decodable, Sendable {
         id2label = mapped
     }
 }
-

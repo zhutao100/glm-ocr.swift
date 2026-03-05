@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "GLMOCR",
     platforms: [
-        .macOS(.v14),
+        .macOS(.v14)
     ],
     products: [
         .library(name: "GLMOCR", targets: ["GLMOCR"]),
@@ -13,7 +13,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ml-explore/mlx-swift", .upToNextMinor(from: "0.30.6")),
-        .package(url: "https://github.com/huggingface/swift-transformers.git",  .upToNextMinor(from: "1.1.6")),
+        .package(url: "https://github.com/huggingface/swift-transformers.git", .upToNextMinor(from: "1.1.6")),
         .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "1.5.0")),
     ],
     targets: [
@@ -25,7 +25,7 @@ let package = Package(
                 .product(name: "Tokenizers", package: "swift-transformers"),
             ],
             swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency"),
+                .enableExperimentalFeature("StrictConcurrency")
             ]
         ),
         .executableTarget(
@@ -36,19 +36,19 @@ let package = Package(
                 .product(name: "Hub", package: "swift-transformers"),
             ],
             swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency"),
+                .enableExperimentalFeature("StrictConcurrency")
             ]
         ),
         .testTarget(
             name: "GLMOCRTests",
             dependencies: [
-                "GLMOCR",
+                "GLMOCR"
             ],
             resources: [
-                .process("Fixtures"),
+                .process("Fixtures")
             ],
             swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency"),
+                .enableExperimentalFeature("StrictConcurrency")
             ]
         ),
     ]

@@ -1,43 +1,44 @@
-import XCTest
 import MLX
+import XCTest
+
 @testable import GLMOCR
 
 final class GLMOCRLanguageRopeIndexTests: XCTestCase {
     private func makeTestConfig(spatialMergeSize: Int = 2) throws -> GLMOCRModelConfig {
         let json = """
-        {
-          "model_type": "glm_ocr",
-          "text_config": {
-            "model_type": "glm",
-            "vocab_size": 1000,
-            "hidden_size": 8,
-            "intermediate_size": 16,
-            "num_hidden_layers": 1,
-            "num_attention_heads": 1,
-            "num_key_value_heads": 1,
-            "max_position_embeddings": 2048,
-            "rms_norm_eps": 1e-5
-          },
-          "vision_config": {
-            "model_type": "vision",
-            "depth": 1,
-            "hidden_size": 8,
-            "intermediate_size": 16,
-            "num_heads": 1,
-            "patch_size": 14,
-            "temporal_patch_size": 2,
-            "out_hidden_size": 8,
-            "spatial_merge_size": \(spatialMergeSize),
-            "rms_norm_eps": 1e-5
-          },
-          "image_token_id": 100,
-          "video_token_id": 101,
-          "image_start_token_id": 102,
-          "image_end_token_id": 103,
-          "video_start_token_id": 104,
-          "video_end_token_id": 105
-        }
-        """
+            {
+              "model_type": "glm_ocr",
+              "text_config": {
+                "model_type": "glm",
+                "vocab_size": 1000,
+                "hidden_size": 8,
+                "intermediate_size": 16,
+                "num_hidden_layers": 1,
+                "num_attention_heads": 1,
+                "num_key_value_heads": 1,
+                "max_position_embeddings": 2048,
+                "rms_norm_eps": 1e-5
+              },
+              "vision_config": {
+                "model_type": "vision",
+                "depth": 1,
+                "hidden_size": 8,
+                "intermediate_size": 16,
+                "num_heads": 1,
+                "patch_size": 14,
+                "temporal_patch_size": 2,
+                "out_hidden_size": 8,
+                "spatial_merge_size": \(spatialMergeSize),
+                "rms_norm_eps": 1e-5
+              },
+              "image_token_id": 100,
+              "video_token_id": 101,
+              "image_start_token_id": 102,
+              "image_end_token_id": 103,
+              "video_start_token_id": 104,
+              "video_end_token_id": 105
+            }
+            """
         let data = Data(json.utf8)
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase

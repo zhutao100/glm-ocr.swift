@@ -64,12 +64,12 @@ final class GLMOCRKVCache {
         precondition(required <= maxLength, "KV cache overflow (offset=\(offset) length=\(length) max=\(maxLength))")
         ensureCapacity(required: required)
 
-        keyCache[0..., 0..., offset ..< required, 0...] = keys
-        valueCache[0..., 0..., offset ..< required, 0...] = values
+        keyCache[0..., 0..., offset..<required, 0...] = keys
+        valueCache[0..., 0..., offset..<required, 0...] = values
         offset = required
 
-        let cachedKeys = keyCache[0..., 0..., 0 ..< offset, 0...]
-        let cachedValues = valueCache[0..., 0..., 0 ..< offset, 0...]
+        let cachedKeys = keyCache[0..., 0..., 0..<offset, 0...]
+        let cachedValues = valueCache[0..., 0..., 0..<offset, 0...]
         return (cachedKeys, cachedValues)
     }
 

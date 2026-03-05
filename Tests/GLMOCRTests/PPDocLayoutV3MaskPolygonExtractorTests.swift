@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import GLMOCR
 
 final class PPDocLayoutV3MaskPolygonExtractorTests: XCTestCase {

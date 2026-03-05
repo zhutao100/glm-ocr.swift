@@ -226,7 +226,8 @@ public enum GLMOCRLanguage {
             }
 
             precondition(
-                ch0.count == unmaskedTokens.count && ch1.count == unmaskedTokens.count && ch2.count == unmaskedTokens.count,
+                ch0.count == unmaskedTokens.count && ch1.count == unmaskedTokens.count
+                    && ch2.count == unmaskedTokens.count,
                 "Internal error: position length mismatch"
             )
             precondition(unmaskedPositions.count == unmaskedTokens.count, "Internal error: mask/token mismatch")
@@ -243,11 +244,15 @@ public enum GLMOCRLanguage {
         }
 
         if let imageGridTHW {
-            precondition(imageIndex == imageGridTHW.count, "imageGridTHW not fully consumed (used=\(imageIndex) total=\(imageGridTHW.count))")
+            precondition(
+                imageIndex == imageGridTHW.count,
+                "imageGridTHW not fully consumed (used=\(imageIndex) total=\(imageGridTHW.count))")
         }
         if let videoGridTHW {
             precondition(videoGroupIndex == 0, "videoGridTHW mismatch (unfinished video group)")
-            precondition(videoIndex == videoGridTHW.count, "videoGridTHW not fully consumed (used=\(videoIndex) total=\(videoGridTHW.count))")
+            precondition(
+                videoIndex == videoGridTHW.count,
+                "videoGridTHW not fully consumed (used=\(videoIndex) total=\(videoGridTHW.count))")
         }
 
         return (
@@ -264,7 +269,7 @@ public enum GLMOCRLanguage {
         if delta.dim(0) < batch {
             delta = tiled(delta, repetitions: [batch / delta.dim(0)])
         } else if delta.dim(0) > batch {
-            delta = delta[0 ..< batch]
+            delta = delta[0..<batch]
         }
 
         if length == 1 {
@@ -272,7 +277,7 @@ public enum GLMOCRLanguage {
             return tiled(pos[.newAxis, 0..., 0...], repetitions: [3, 1, 1])
         }
 
-        var base = MLXArray(0 ..< length).reshaped(1, length).asType(.int32)
+        var base = MLXArray(0..<length).reshaped(1, length).asType(.int32)
         base = broadcast(base, to: [batch, length])
         let pos = base + delta.reshaped(batch, 1)
         return tiled(pos[.newAxis, 0..., 0...], repetitions: [3, 1, 1])

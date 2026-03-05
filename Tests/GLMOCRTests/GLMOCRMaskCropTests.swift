@@ -1,5 +1,6 @@
 import CoreGraphics
 import XCTest
+
 @testable import GLMOCR
 
 final class GLMOCRMaskCropTests: XCTestCase {
@@ -81,12 +82,14 @@ final class GLMOCRMaskCropTests: XCTestCase {
             ]
         )
 
-        guard let masked = GLMOCRDocumentParser.apply(
-            mask: mask,
-            toCrop: crop,
-            inImageSize: (width: width, height: height),
-            cropOriginPx: (x: 0, y: 0)
-        ) else {
+        guard
+            let masked = GLMOCRDocumentParser.apply(
+                mask: mask,
+                toCrop: crop,
+                inImageSize: (width: width, height: height),
+                cropOriginPx: (x: 0, y: 0)
+            )
+        else {
             XCTFail("Expected masked image")
             return
         }
@@ -112,19 +115,21 @@ final class GLMOCRMaskCropTests: XCTestCase {
         }
 
         let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
-        guard let image = CGImage(
-            width: width,
-            height: height,
-            bitsPerComponent: 8,
-            bitsPerPixel: 32,
-            bytesPerRow: bytesPerRow,
-            space: colorSpace,
-            bitmapInfo: CGBitmapInfo(rawValue: bitmapInfo),
-            provider: provider,
-            decode: nil,
-            shouldInterpolate: false,
-            intent: .defaultIntent
-        ) else {
+        guard
+            let image = CGImage(
+                width: width,
+                height: height,
+                bitsPerComponent: 8,
+                bitsPerPixel: 32,
+                bytesPerRow: bytesPerRow,
+                space: colorSpace,
+                bitmapInfo: CGBitmapInfo(rawValue: bitmapInfo),
+                provider: provider,
+                decode: nil,
+                shouldInterpolate: false,
+                intent: .defaultIntent
+            )
+        else {
             XCTFail("Unable to create image")
             throw NSError(domain: "GLMOCRMaskCropTests", code: 3)
         }
@@ -142,15 +147,17 @@ final class GLMOCRMaskCropTests: XCTestCase {
         }
 
         let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
-        guard let context = CGContext(
-            data: &data,
-            width: width,
-            height: height,
-            bitsPerComponent: 8,
-            bytesPerRow: bytesPerRow,
-            space: colorSpace,
-            bitmapInfo: bitmapInfo
-        ) else {
+        guard
+            let context = CGContext(
+                data: &data,
+                width: width,
+                height: height,
+                bitsPerComponent: 8,
+                bytesPerRow: bytesPerRow,
+                space: colorSpace,
+                bitmapInfo: bitmapInfo
+            )
+        else {
             XCTFail("Unable to create context")
             throw NSError(domain: "GLMOCRMaskCropTests", code: 5)
         }

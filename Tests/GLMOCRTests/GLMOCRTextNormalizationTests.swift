@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import GLMOCR
 
 final class GLMOCRTextNormalizationTests: XCTestCase {
@@ -33,4 +34,3 @@ final class GLMOCRTextNormalizationTests: XCTestCase {
         XCTAssertEqual(GLMOCRTextNormalization.normalizeText("*a b*"), "*a b*")
     }
 }
-

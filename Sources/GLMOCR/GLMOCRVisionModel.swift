@@ -16,8 +16,7 @@ private func glmOcrApplyRotaryPosEmbVision(
     cos: MLXArray,
     sin: MLXArray
 ) -> (MLXArray, MLXArray) {
-    
-    
+
     let cos = cos.expandedDimensions(axis: 1)
     let sin = sin.expandedDimensions(axis: 1)
 
@@ -201,9 +200,12 @@ final class GLMOCRVisionMLP: Module, UnaryLayer {
     @ModuleInfo(key: "down_proj") var downProj: Linear
 
     init(config: GLMOCRModelConfig.VisionConfig) {
-        self._gateProj.wrappedValue = Linear(config.hiddenSize, config.intermediateSize, bias: config.attentionBias ?? true)
-        self._upProj.wrappedValue = Linear(config.hiddenSize, config.intermediateSize, bias: config.attentionBias ?? true)
-        self._downProj.wrappedValue = Linear(config.intermediateSize, config.hiddenSize, bias: config.attentionBias ?? true)
+        self._gateProj.wrappedValue = Linear(
+            config.hiddenSize, config.intermediateSize, bias: config.attentionBias ?? true)
+        self._upProj.wrappedValue = Linear(
+            config.hiddenSize, config.intermediateSize, bias: config.attentionBias ?? true)
+        self._downProj.wrappedValue = Linear(
+            config.intermediateSize, config.hiddenSize, bias: config.attentionBias ?? true)
         super.init()
     }
 
@@ -236,11 +238,13 @@ final class GLMOCRVisionBlock: Module {
     ) -> MLXArray {
         var hiddenStates = hiddenStates
 
-        hiddenStates = hiddenStates + attn(
-            norm1(hiddenStates),
-            splitIndices: splitIndices,
-            positionEmbeddings: positionEmbeddings
-        )
+        hiddenStates =
+            hiddenStates
+            + attn(
+                norm1(hiddenStates),
+                splitIndices: splitIndices,
+                positionEmbeddings: positionEmbeddings
+            )
         hiddenStates = hiddenStates + mlp(norm2(hiddenStates))
         return hiddenStates
     }
@@ -371,6 +375,5 @@ private func glmOcrVisionPositionEmbeddings(
     let rotaryEmb = concatenated([freqsH, freqsW], axis: -1)
     let emb = concatenated([rotaryEmb, rotaryEmb], axis: -1)
 
-    
     return (cos(emb).asType(dtype), sin(emb).asType(dtype))
 }

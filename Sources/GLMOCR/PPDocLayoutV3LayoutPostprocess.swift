@@ -9,7 +9,7 @@ public enum PPDocLayoutV3MergeMode: String, Sendable, Codable {
 public struct PPDocLayoutV3Mask: Sendable, Codable {
     public var width: Int
     public var height: Int
-    public var data: [UInt8] 
+    public var data: [UInt8]
 
     public init(width: Int, height: Int, data: [UInt8]) {
         self.width = width
@@ -47,7 +47,7 @@ public struct PPDocLayoutV3PaddleBox: Sendable, Codable, Equatable {
     public var clsId: Int
     public var label: String
     public var score: Double
-    public var coordinate: [Int] 
+    public var coordinate: [Int]
     public var order: Int?
     public var polygonPoints: [[Double]]
     public var mask: PPDocLayoutV3Mask?

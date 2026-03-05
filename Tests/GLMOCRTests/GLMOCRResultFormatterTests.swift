@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import GLMOCR
 
 final class GLMOCRResultFormatterTests: XCTestCase {
@@ -6,7 +7,8 @@ final class GLMOCRResultFormatterTests: XCTestCase {
         let formatter = GLMOCRResultFormatter()
 
         let page: [GLMOCRFormattedRegion] = [
-            .init(index: 0, label: "formula", bbox2D: [0, 0, 10, 10], content: "E = mc^2", nativeLabel: "display_formula"),
+            .init(
+                index: 0, label: "formula", bbox2D: [0, 0, 10, 10], content: "E = mc^2", nativeLabel: "display_formula"),
             .init(index: 1, label: "text", bbox2D: [0, 11, 10, 12], content: "(1)", nativeLabel: "formula_number"),
         ]
 
@@ -22,7 +24,8 @@ final class GLMOCRResultFormatterTests: XCTestCase {
 
         let page: [GLMOCRFormattedRegion] = [
             .init(index: 0, label: "text", bbox2D: [0, 11, 10, 12], content: "（2.1）", nativeLabel: "formula_number"),
-            .init(index: 1, label: "formula", bbox2D: [0, 0, 10, 10], content: "$$x+y$$", nativeLabel: "display_formula"),
+            .init(
+                index: 1, label: "formula", bbox2D: [0, 0, 10, 10], content: "$$x+y$$", nativeLabel: "display_formula"),
         ]
 
         let result = formatter.format(pages: [page])

@@ -3,10 +3,10 @@ import MLX
 import MLXNN
 
 public struct PPDocLayoutV3ForObjectDetectionOutput {
-    public let logits: MLXArray 
-    public let predBoxes: MLXArray 
-    public let orderLogits: MLXArray 
-    public let outMasks: MLXArray 
+    public let logits: MLXArray
+    public let predBoxes: MLXArray
+    public let orderLogits: MLXArray
+    public let outMasks: MLXArray
 }
 
 private func ppdoclayoutActivation(_ name: String, _ x: MLXArray) -> MLXArray {
@@ -40,8 +40,6 @@ private func ppdoclayoutPadBottomRight(_ x: MLXArray, by pad: Int) -> MLXArray {
     return padded(x, widths: widths, mode: .constant)
 }
 
-
-
 final class PPDocLayoutV3ConvLayer: Module, UnaryLayer {
     @ModuleInfo(key: "convolution") var convolution: Conv2d
     @ModuleInfo(key: "normalization") var normalization: BatchNorm
@@ -56,7 +54,8 @@ final class PPDocLayoutV3ConvLayer: Module, UnaryLayer {
             padding: .init(kernelSize / 2),
             bias: false
         )
-        _normalization.wrappedValue = BatchNorm(featureCount: outChannels, eps: 1e-5, momentum: 0.1, affine: true, trackRunningStats: true)
+        _normalization.wrappedValue = BatchNorm(
+            featureCount: outChannels, eps: 1e-5, momentum: 0.1, affine: true, trackRunningStats: true)
         self.activation = activation
         super.init()
     }
@@ -71,7 +70,10 @@ final class PPDocLayoutV3ConvNormLayer: Module, UnaryLayer {
     @ModuleInfo(key: "norm") var norm: BatchNorm
     private let activation: String?
 
-    init(config: PPDocLayoutV3Config, inChannels: Int, outChannels: Int, kernelSize: Int, stride: Int, padding: Int? = nil, activation: String? = nil) {
+    init(
+        config: PPDocLayoutV3Config, inChannels: Int, outChannels: Int, kernelSize: Int, stride: Int,
+        padding: Int? = nil, activation: String? = nil
+    ) {
         _conv.wrappedValue = Conv2d(
             inputChannels: inChannels,
             outputChannels: outChannels,
@@ -102,7 +104,10 @@ final class PPDocLayoutV3ConvBN: Module, UnaryLayer {
     @ModuleInfo(key: "conv") var conv: Conv2d
     @ModuleInfo(key: "bn") var bn: BatchNorm
 
-    init(config: PPDocLayoutV3Config, inChannels: Int, outChannels: Int, kernelSize: Int, stride: Int, padding: Int, bias: Bool = false) {
+    init(
+        config: PPDocLayoutV3Config, inChannels: Int, outChannels: Int, kernelSize: Int, stride: Int, padding: Int,
+        bias: Bool = false
+    ) {
         _conv.wrappedValue = Conv2d(
             inputChannels: inChannels,
             outputChannels: outChannels,
@@ -125,8 +130,6 @@ final class PPDocLayoutV3ConvBN: Module, UnaryLayer {
         bn(conv(x))
     }
 }
-
-
 
 final class PPDocLayoutV3MLPPredictionHead: Module, UnaryLayer {
     @ModuleInfo(key: "layers") var layers: [Linear]
@@ -171,8 +174,6 @@ final class PPDocLayoutV3MLP: Module, UnaryLayer {
     }
 }
 
-
-
 final class PPDocLayoutV3SelfAttention: Module {
     private let numHeads: Int
     private let headDim: Int
@@ -195,7 +196,9 @@ final class PPDocLayoutV3SelfAttention: Module {
         super.init()
     }
 
-    func callAsFunction(hiddenStates: MLXArray, attentionMask: MLXArray? = nil, positionEmbeddings: MLXArray? = nil) -> MLXArray {
+    func callAsFunction(hiddenStates: MLXArray, attentionMask: MLXArray? = nil, positionEmbeddings: MLXArray? = nil)
+        -> MLXArray
+    {
         let batch = hiddenStates.dim(0)
         let seqLen = hiddenStates.dim(1)
         let hiddenSize = hiddenStates.dim(2)
@@ -239,7 +242,8 @@ final class PPDocLayoutV3EncoderLayer: Module, UnaryLayer {
         self.normalizeBefore = config.normalizeBefore
         self.dropout = config.dropout
         let hiddenSize = config.encoderHiddenDim
-        _selfAttn.wrappedValue = PPDocLayoutV3SelfAttention(hiddenSize: hiddenSize, numHeads: config.encoderAttentionHeads)
+        _selfAttn.wrappedValue = PPDocLayoutV3SelfAttention(
+            hiddenSize: hiddenSize, numHeads: config.encoderAttentionHeads)
         _selfAttnLayerNorm.wrappedValue = LayerNorm(dimensions: hiddenSize, eps: config.layerNormEps)
         _mlp.wrappedValue = PPDocLayoutV3MLP(
             config: config,
@@ -255,14 +259,17 @@ final class PPDocLayoutV3EncoderLayer: Module, UnaryLayer {
         callAsFunction(hiddenStates, attentionMask: nil, spatialPositionEmbeddings: nil)
     }
 
-    func callAsFunction(_ hiddenStates: MLXArray, attentionMask: MLXArray?, spatialPositionEmbeddings: MLXArray?) -> MLXArray {
+    func callAsFunction(_ hiddenStates: MLXArray, attentionMask: MLXArray?, spatialPositionEmbeddings: MLXArray?)
+        -> MLXArray
+    {
         var hiddenStates = hiddenStates
         var residual = hiddenStates
         if normalizeBefore {
             hiddenStates = selfAttnLayerNorm(hiddenStates)
         }
 
-        hiddenStates = selfAttn(hiddenStates: hiddenStates, attentionMask: attentionMask, positionEmbeddings: spatialPositionEmbeddings)
+        hiddenStates = selfAttn(
+            hiddenStates: hiddenStates, attentionMask: attentionMask, positionEmbeddings: spatialPositionEmbeddings)
         if dropout > 0 && training {
             hiddenStates = Dropout(p: dropout)(hiddenStates)
         }
@@ -313,7 +320,7 @@ final class PPDocLayoutV3SinePositionEmbedding {
         let omega = arange(posDim, dtype: .float32) / Float(posDim)
         let omegaScaled = 1.0 / pow(MLXArray(Float(temperature)), omega)
 
-        let outW = gridW.flattened()[.newAxis, 0...] * omegaScaled[0..., .newAxis] 
+        let outW = gridW.flattened()[.newAxis, 0...] * omegaScaled[0..., .newAxis]
         let outH = gridH.flattened()[.newAxis, 0...] * omegaScaled[0..., .newAxis]
 
         let outW2 = outW.transposed(1, 0)
@@ -342,13 +349,14 @@ final class PPDocLayoutV3AIFILayer: Module, UnaryLayer {
 
     init(config: PPDocLayoutV3Config) {
         self.encoderHiddenDim = config.encoderHiddenDim
-        self.positionEmbedding = PPDocLayoutV3SinePositionEmbedding(embedDim: config.encoderHiddenDim, temperature: config.positionalEncodingTemperature)
+        self.positionEmbedding = PPDocLayoutV3SinePositionEmbedding(
+            embedDim: config.encoderHiddenDim, temperature: config.positionalEncodingTemperature)
         _layers.wrappedValue = (0..<config.encoderLayers).map { _ in PPDocLayoutV3EncoderLayer(config: config) }
         super.init()
     }
 
     func callAsFunction(_ featureMap: MLXArray) -> MLXArray {
-        
+
         let batch = featureMap.dim(0)
         let height = featureMap.dim(1)
         let width = featureMap.dim(2)
@@ -364,8 +372,6 @@ final class PPDocLayoutV3AIFILayer: Module, UnaryLayer {
     }
 }
 
-
-
 final class PPDocLayoutV3RepVggBlock: Module, UnaryLayer {
     @ModuleInfo(key: "conv1") var conv1: PPDocLayoutV3ConvNormLayer
     @ModuleInfo(key: "conv2") var conv2: PPDocLayoutV3ConvNormLayer
@@ -374,8 +380,12 @@ final class PPDocLayoutV3RepVggBlock: Module, UnaryLayer {
     init(config: PPDocLayoutV3Config) {
         self.activation = config.activationFunction
         let hiddenChannels = Int(Double(config.encoderHiddenDim) * config.hiddenExpansion)
-        _conv1.wrappedValue = PPDocLayoutV3ConvNormLayer(config: config, inChannels: hiddenChannels, outChannels: hiddenChannels, kernelSize: 3, stride: 1, padding: 1)
-        _conv2.wrappedValue = PPDocLayoutV3ConvNormLayer(config: config, inChannels: hiddenChannels, outChannels: hiddenChannels, kernelSize: 1, stride: 1, padding: 0)
+        _conv1.wrappedValue = PPDocLayoutV3ConvNormLayer(
+            config: config, inChannels: hiddenChannels, outChannels: hiddenChannels, kernelSize: 3, stride: 1,
+            padding: 1)
+        _conv2.wrappedValue = PPDocLayoutV3ConvNormLayer(
+            config: config, inChannels: hiddenChannels, outChannels: hiddenChannels, kernelSize: 1, stride: 1,
+            padding: 0)
         super.init()
     }
 
@@ -393,8 +403,12 @@ final class PPDocLayoutV3CSPRepLayer: Module, UnaryLayer {
         let inChannels = config.encoderHiddenDim * 2
         let outChannels = config.encoderHiddenDim
         let hiddenChannels = Int(Double(outChannels) * config.hiddenExpansion)
-        _conv1.wrappedValue = PPDocLayoutV3ConvNormLayer(config: config, inChannels: inChannels, outChannels: hiddenChannels, kernelSize: 1, stride: 1, activation: config.activationFunction)
-        _conv2.wrappedValue = PPDocLayoutV3ConvNormLayer(config: config, inChannels: inChannels, outChannels: hiddenChannels, kernelSize: 1, stride: 1, activation: config.activationFunction)
+        _conv1.wrappedValue = PPDocLayoutV3ConvNormLayer(
+            config: config, inChannels: inChannels, outChannels: hiddenChannels, kernelSize: 1, stride: 1,
+            activation: config.activationFunction)
+        _conv2.wrappedValue = PPDocLayoutV3ConvNormLayer(
+            config: config, inChannels: inChannels, outChannels: hiddenChannels, kernelSize: 1, stride: 1,
+            activation: config.activationFunction)
         _bottlenecks.wrappedValue = (0..<3).map { _ in PPDocLayoutV3RepVggBlock(config: config) }
         super.init()
     }
@@ -405,7 +419,7 @@ final class PPDocLayoutV3CSPRepLayer: Module, UnaryLayer {
             h1 = b(h1)
         }
         let h2 = conv2(x)
-        
+
         return h1 + h2
     }
 }
@@ -419,7 +433,9 @@ final class PPDocLayoutV3ScaleHead: Module, UnaryLayer {
         out.reserveCapacity(headLength * 2)
         for k in 0..<headLength {
             let inC = (k == 0) ? inChannels : featureChannels
-            out.append(PPDocLayoutV3ConvLayer(inChannels: inC, outChannels: featureChannels, kernelSize: 3, stride: 1, activation: "silu"))
+            out.append(
+                PPDocLayoutV3ConvLayer(
+                    inChannels: inC, outChannels: featureChannels, kernelSize: 3, stride: 1, activation: "silu"))
             if fpnStride != baseStride {
                 out.append(Upsample(scaleFactor: 2.0, mode: .linear(alignCorners: alignCorners)))
             }
@@ -459,9 +475,12 @@ final class PPDocLayoutV3MaskFeatFPN: Module {
         let baseStride = self.fpnStrides[0]
 
         _scaleHeads.wrappedValue = zip(inChannelsReordered, self.fpnStrides).map { inC, stride in
-            PPDocLayoutV3ScaleHead(inChannels: inC, featureChannels: featureChannels, fpnStride: stride, baseStride: baseStride, alignCorners: alignCorners)
+            PPDocLayoutV3ScaleHead(
+                inChannels: inC, featureChannels: featureChannels, fpnStride: stride, baseStride: baseStride,
+                alignCorners: alignCorners)
         }
-        _outputConv.wrappedValue = PPDocLayoutV3ConvLayer(inChannels: featureChannels, outChannels: outChannels, kernelSize: 3, stride: 1, activation: "silu")
+        _outputConv.wrappedValue = PPDocLayoutV3ConvLayer(
+            inChannels: featureChannels, outChannels: outChannels, kernelSize: 3, stride: 1, activation: "silu")
         super.init()
     }
 
@@ -471,7 +490,10 @@ final class PPDocLayoutV3MaskFeatFPN: Module {
 
         for i in 1..<fpnStrides.count {
             let scaled = scaleHeads[i](x[i])
-            let up = Upsample(scaleFactor: [Float(output.dim(1)) / Float(scaled.dim(1)), Float(output.dim(2)) / Float(scaled.dim(2))], mode: .linear(alignCorners: alignCorners))
+            let up = Upsample(
+                scaleFactor: [
+                    Float(output.dim(1)) / Float(scaled.dim(1)), Float(output.dim(2)) / Float(scaled.dim(2)),
+                ], mode: .linear(alignCorners: alignCorners))
             output = output + up(scaled)
         }
 
@@ -484,8 +506,10 @@ final class PPDocLayoutV3EncoderMaskOutput: Module, UnaryLayer {
     @ModuleInfo(key: "conv") var conv: Conv2d
 
     init(inChannels: Int, numPrototypes: Int) {
-        _baseConv.wrappedValue = PPDocLayoutV3ConvLayer(inChannels: inChannels, outChannels: inChannels, kernelSize: 3, stride: 1, activation: "silu")
-        _conv.wrappedValue = Conv2d(inputChannels: inChannels, outputChannels: numPrototypes, kernelSize: 1, stride: 1, padding: 0, bias: true)
+        _baseConv.wrappedValue = PPDocLayoutV3ConvLayer(
+            inChannels: inChannels, outChannels: inChannels, kernelSize: 3, stride: 1, activation: "silu")
+        _conv.wrappedValue = Conv2d(
+            inputChannels: inChannels, outputChannels: numPrototypes, kernelSize: 1, stride: 1, padding: 0, bias: true)
         super.init()
     }
 
@@ -519,12 +543,16 @@ final class PPDocLayoutV3HybridEncoder: Module {
         let numPanStages = numFpnStages
 
         _lateralConvs.wrappedValue = (0..<numFpnStages).map { _ in
-            PPDocLayoutV3ConvNormLayer(config: config, inChannels: config.encoderHiddenDim, outChannels: config.encoderHiddenDim, kernelSize: 1, stride: 1, activation: config.activationFunction)
+            PPDocLayoutV3ConvNormLayer(
+                config: config, inChannels: config.encoderHiddenDim, outChannels: config.encoderHiddenDim,
+                kernelSize: 1, stride: 1, activation: config.activationFunction)
         }
         _fpnBlocks.wrappedValue = (0..<numFpnStages).map { _ in PPDocLayoutV3CSPRepLayer(config: config) }
 
         _downsampleConvs.wrappedValue = (0..<numPanStages).map { _ in
-            PPDocLayoutV3ConvNormLayer(config: config, inChannels: config.encoderHiddenDim, outChannels: config.encoderHiddenDim, kernelSize: 3, stride: 2, activation: config.activationFunction)
+            PPDocLayoutV3ConvNormLayer(
+                config: config, inChannels: config.encoderHiddenDim, outChannels: config.encoderHiddenDim,
+                kernelSize: 3, stride: 2, activation: config.activationFunction)
         }
         _panBlocks.wrappedValue = (0..<numPanStages).map { _ in PPDocLayoutV3CSPRepLayer(config: config) }
 
@@ -535,13 +563,17 @@ final class PPDocLayoutV3HybridEncoder: Module {
             featureChannels: maskFeatureChannels[0],
             outChannels: maskFeatureChannels[1]
         )
-        _encoderMaskLateral.wrappedValue = PPDocLayoutV3ConvLayer(inChannels: config.x4FeatDim, outChannels: maskFeatureChannels[1], kernelSize: 3, stride: 1, activation: "silu")
-        _encoderMaskOutput.wrappedValue = PPDocLayoutV3EncoderMaskOutput(inChannels: maskFeatureChannels[1], numPrototypes: config.numPrototypes)
+        _encoderMaskLateral.wrappedValue = PPDocLayoutV3ConvLayer(
+            inChannels: config.x4FeatDim, outChannels: maskFeatureChannels[1], kernelSize: 3, stride: 1,
+            activation: "silu")
+        _encoderMaskOutput.wrappedValue = PPDocLayoutV3EncoderMaskOutput(
+            inChannels: maskFeatureChannels[1], numPrototypes: config.numPrototypes)
 
         super.init()
     }
 
-    func callAsFunction(_ featureMaps: [MLXArray], x4Feat: MLXArray) -> (panFeatureMaps: [MLXArray], maskFeat: MLXArray) {
+    func callAsFunction(_ featureMaps: [MLXArray], x4Feat: MLXArray) -> (panFeatureMaps: [MLXArray], maskFeat: MLXArray)
+    {
         var featureMaps = featureMaps
         if !aifi.isEmpty {
             for (i, encInd) in encodeProjLayers.enumerated() {
@@ -549,7 +581,6 @@ final class PPDocLayoutV3HybridEncoder: Module {
             }
         }
 
-        
         var fpnFeatureMaps: [MLXArray] = [featureMaps.last!]
         for (idx, (lateralConv, fpnBlock)) in zip(lateralConvs, fpnBlocks).enumerated() {
             let backboneFeatureMap = featureMaps[(featureMaps.count - 2) - idx]
@@ -563,7 +594,6 @@ final class PPDocLayoutV3HybridEncoder: Module {
         }
         fpnFeatureMaps.reverse()
 
-        
         var panFeatureMaps: [MLXArray] = [fpnFeatureMaps[0]]
         for idx in 0..<downsampleConvs.count {
             let top = panFeatureMaps.last!
@@ -582,8 +612,6 @@ final class PPDocLayoutV3HybridEncoder: Module {
         return (panFeatureMaps: panFeatureMaps, maskFeat: maskFeat)
     }
 }
-
-
 
 private enum PPDocLayoutV3Metal {
     static let gridSampleForward = MLXFast.metalKernel(
@@ -715,28 +743,27 @@ final class PPDocLayoutV3MultiscaleDeformableAttention: Module {
         let numQueries = hiddenStates.dim(1)
         let sequenceLength = encoderHiddenStates.dim(1)
 
-        var value = valueProj(encoderHiddenStates) 
+        var value = valueProj(encoderHiddenStates)
         value = value.reshaped(batch, sequenceLength, nHeads, headDim)
 
         var offsets = samplingOffsets(hiddenStates).reshaped(batch, numQueries, nHeads, nLevels, nPoints, 2)
         var weights = attentionWeights(hiddenStates).reshaped(batch, numQueries, nHeads, nLevels * nPoints)
         weights = softmax(weights, axes: [-1]).reshaped(batch, numQueries, nHeads, nLevels, nPoints)
 
-        
-        let rpXY = referencePoints[0..., 0..., 0..., 0 ..< 2]
-        let rpWH = referencePoints[0..., 0..., 0..., 2 ..< 4]
-        let samplingLocations = rpXY[0..., 0..., .newAxis, 0..., .newAxis, 0...]
+        let rpXY = referencePoints[0..., 0..., 0..., 0..<2]
+        let rpWH = referencePoints[0..., 0..., 0..., 2..<4]
+        let samplingLocations =
+            rpXY[0..., 0..., .newAxis, 0..., .newAxis, 0...]
             + (offsets / Float(nPoints)) * rpWH[0..., 0..., .newAxis, 0..., .newAxis, 0...] * 0.5
 
-        let samplingGrids = (samplingLocations * 2.0) - 1.0 
+        let samplingGrids = (samplingLocations * 2.0) - 1.0
 
-        
         var valueByLevel: [MLXArray] = []
         valueByLevel.reserveCapacity(nLevels)
         var cursor = 0
         for (h, w) in spatialShapes {
             let count = h * w
-            valueByLevel.append(value[0..., cursor ..< cursor + count, 0..., 0...])
+            valueByLevel.append(value[0..., cursor..<cursor + count, 0..., 0...])
             cursor += count
         }
         precondition(cursor == sequenceLength, "spatialShapes do not sum to sequenceLength")
@@ -745,30 +772,29 @@ final class PPDocLayoutV3MultiscaleDeformableAttention: Module {
         sampledByLevel.reserveCapacity(nLevels)
 
         for (levelId, (h, w)) in spatialShapes.enumerated() {
-            let vLevel = valueByLevel[levelId] 
+            let vLevel = valueByLevel[levelId]
             let v = vLevel.transposed(0, 2, 1, 3).reshaped(batch * nHeads, h, w, headDim)
 
-            let gridLevel = samplingGrids[0..., 0..., 0..., levelId, 0..., 0...] 
+            let gridLevel = samplingGrids[0..., 0..., 0..., levelId, 0..., 0...]
             let grid = gridLevel.transposed(0, 2, 1, 3, 4).reshaped(batch * nHeads, numQueries, nPoints, 2)
 
-            let sampled = PPDocLayoutV3Metal.gridSampleBilinear(v, grid) 
+            let sampled = PPDocLayoutV3Metal.gridSampleBilinear(v, grid)
             sampledByLevel.append(sampled)
         }
 
-        
-        let sampledStack = stacked(sampledByLevel, axis: 2).reshaped(batch * nHeads, numQueries, nLevels * nPoints, headDim)
+        let sampledStack = stacked(sampledByLevel, axis: 2).reshaped(
+            batch * nHeads, numQueries, nLevels * nPoints, headDim)
 
         var attn = weights.transposed(0, 2, 1, 3, 4).reshaped(batch * nHeads, numQueries, nLevels * nPoints)
         attn = attn.expandedDimensions(axis: -1)
 
-        var output = (sampledStack * attn).sum(axes: [2]) 
-        output = output.reshaped(batch, nHeads, numQueries, headDim).transposed(0, 2, 1, 3).reshaped(batch, numQueries, dModel)
+        var output = (sampledStack * attn).sum(axes: [2])
+        output = output.reshaped(batch, nHeads, numQueries, headDim).transposed(0, 2, 1, 3).reshaped(
+            batch, numQueries, dModel)
 
         return outputProj(output)
     }
 }
-
-
 
 final class PPDocLayoutV3DecoderLayer: Module {
     @ModuleInfo(key: "self_attn") var selfAttn: PPDocLayoutV3SelfAttention
@@ -782,20 +808,28 @@ final class PPDocLayoutV3DecoderLayer: Module {
 
     init(config: PPDocLayoutV3Config) {
         self.dropout = config.dropout
-        _selfAttn.wrappedValue = PPDocLayoutV3SelfAttention(hiddenSize: config.dModel, numHeads: config.decoderAttentionHeads)
+        _selfAttn.wrappedValue = PPDocLayoutV3SelfAttention(
+            hiddenSize: config.dModel, numHeads: config.decoderAttentionHeads)
         _selfAttnLayerNorm.wrappedValue = LayerNorm(dimensions: config.dModel, eps: config.layerNormEps)
-        _encoderAttn.wrappedValue = PPDocLayoutV3MultiscaleDeformableAttention(config: config, numHeads: config.decoderAttentionHeads, nPoints: config.decoderNPoints)
+        _encoderAttn.wrappedValue = PPDocLayoutV3MultiscaleDeformableAttention(
+            config: config, numHeads: config.decoderAttentionHeads, nPoints: config.decoderNPoints)
         _encoderAttnLayerNorm.wrappedValue = LayerNorm(dimensions: config.dModel, eps: config.layerNormEps)
-        _mlp.wrappedValue = PPDocLayoutV3MLP(config: config, hiddenSize: config.dModel, intermediateSize: config.decoderFfnDim, activationFunction: config.decoderActivationFunction)
+        _mlp.wrappedValue = PPDocLayoutV3MLP(
+            config: config, hiddenSize: config.dModel, intermediateSize: config.decoderFfnDim,
+            activationFunction: config.decoderActivationFunction)
         _finalLayerNorm.wrappedValue = LayerNorm(dimensions: config.dModel, eps: config.layerNormEps)
         super.init()
     }
 
-    func callAsFunction(_ hiddenStates: MLXArray, objectQueriesPositionEmbeddings: MLXArray, referencePoints: MLXArray, encoderHiddenStates: MLXArray, spatialShapes: [(height: Int, width: Int)]) -> MLXArray {
+    func callAsFunction(
+        _ hiddenStates: MLXArray, objectQueriesPositionEmbeddings: MLXArray, referencePoints: MLXArray,
+        encoderHiddenStates: MLXArray, spatialShapes: [(height: Int, width: Int)]
+    ) -> MLXArray {
         var hiddenStates = hiddenStates
         var residual = hiddenStates
 
-        hiddenStates = selfAttn(hiddenStates: hiddenStates, attentionMask: nil, positionEmbeddings: objectQueriesPositionEmbeddings)
+        hiddenStates = selfAttn(
+            hiddenStates: hiddenStates, attentionMask: nil, positionEmbeddings: objectQueriesPositionEmbeddings)
         if dropout > 0 && training {
             hiddenStates = Dropout(p: dropout)(hiddenStates)
         }
@@ -856,7 +890,7 @@ final class PPDocLayoutV3Decoder: Module {
     ) -> (logits: MLXArray, predBoxes: MLXArray, orderLogits: MLXArray, outMasks: MLXArray) {
         var hiddenStates = inputsEmbeds
 
-        var referencePoints = sigmoid(referencePointsUnact) 
+        var referencePoints = sigmoid(referencePointsUnact)
 
         var lastLogits: MLXArray = .mlxNone
         var lastPredBoxes: MLXArray = referencePoints
@@ -867,14 +901,14 @@ final class PPDocLayoutV3Decoder: Module {
         let maskH = maskFeat.dim(1)
         let maskW = maskFeat.dim(2)
         let proto = maskFeat.dim(3)
-        let maskFlat = maskFeat.reshaped(batch, maskH * maskW, proto).transposed(0, 2, 1) 
+        let maskFlat = maskFeat.reshaped(batch, maskH * maskW, proto).transposed(0, 2, 1)
 
         let seq = hiddenStates.dim(1)
         let mask2d = tril(MLXArray.ones([seq, seq], type: Float.self), k: 0) .> 0
         let lowerTriMask = mask2d[.newAxis, 0..., 0...]
 
         for (idx, layer) in layers.enumerated() {
-            let referencePointsInput = referencePoints.expandedDimensions(axis: 2) 
+            let referencePointsInput = referencePoints.expandedDimensions(axis: 2)
             let queryPos = queryPosHead(referencePoints)
 
             hiddenStates = layer(
@@ -894,12 +928,12 @@ final class PPDocLayoutV3Decoder: Module {
             lastPredBoxes = newReferencePoints
 
             if idx < orderHead.count {
-                let validQuery = outQuery 
+                let validQuery = outQuery
                 lastOrderLogits = globalPointer(orderHead[idx](validQuery), lowerTriangleMask: lowerTriMask)
             }
 
             if idx == layers.count - 1 {
-                let maskQueryEmbed = maskQueryHead(outQuery) 
+                let maskQueryEmbed = maskQueryHead(outQuery)
                 lastOutMasks = matmul(maskQueryEmbed, maskFlat).reshaped(batch, numQueries, maskH, maskW)
             }
         }
@@ -907,8 +941,6 @@ final class PPDocLayoutV3Decoder: Module {
         return (logits: lastLogits, predBoxes: lastPredBoxes, orderLogits: lastOrderLogits, outMasks: lastOutMasks)
     }
 }
-
-
 
 final class PPDocLayoutV3GlobalPointer: Module, UnaryLayer {
     private let headSize: Int
@@ -922,7 +954,7 @@ final class PPDocLayoutV3GlobalPointer: Module, UnaryLayer {
     }
 
     func callAsFunction(_ x: MLXArray, lowerTriangleMask: MLXArray) -> MLXArray {
-        
+
         let batch = x.dim(0)
         let seq = x.dim(1)
 
@@ -932,7 +964,6 @@ final class PPDocLayoutV3GlobalPointer: Module, UnaryLayer {
 
         var logits = matmul(q, k.transposed(0, 2, 1)) / sqrt(Float(headSize))
 
-        
         logits = which(lowerTriangleMask, MLXArray(-1e4, dtype: logits.dtype), logits)
         return logits
     }
@@ -945,14 +976,15 @@ final class PPDocLayoutV3GlobalPointer: Module, UnaryLayer {
     }
 }
 
-
-
 final class HGNetV2ConvLayer: Module, UnaryLayer {
     @ModuleInfo(key: "convolution") var convolution: Conv2d
     @ModuleInfo(key: "normalization") var normalization: BatchNorm
     private let activation: String?
 
-    init(inChannels: Int, outChannels: Int, kernelSize: Int, stride: Int = 1, groups: Int = 1, activation: String? = "relu") {
+    init(
+        inChannels: Int, outChannels: Int, kernelSize: Int, stride: Int = 1, groups: Int = 1,
+        activation: String? = "relu"
+    ) {
         _convolution.wrappedValue = Conv2d(
             inputChannels: inChannels,
             outputChannels: outChannels,
@@ -962,7 +994,8 @@ final class HGNetV2ConvLayer: Module, UnaryLayer {
             groups: groups,
             bias: false
         )
-        _normalization.wrappedValue = BatchNorm(featureCount: outChannels, eps: 1e-5, momentum: 0.1, affine: true, trackRunningStats: true)
+        _normalization.wrappedValue = BatchNorm(
+            featureCount: outChannels, eps: 1e-5, momentum: 0.1, affine: true, trackRunningStats: true)
         self.activation = activation
         super.init()
     }
@@ -979,8 +1012,11 @@ final class HGNetV2ConvLayerLight: Module, UnaryLayer {
     @ModuleInfo(key: "conv2") var conv2: HGNetV2ConvLayer
 
     init(inChannels: Int, outChannels: Int, kernelSize: Int) {
-        _conv1.wrappedValue = HGNetV2ConvLayer(inChannels: inChannels, outChannels: outChannels, kernelSize: 1, stride: 1, groups: 1, activation: nil)
-        _conv2.wrappedValue = HGNetV2ConvLayer(inChannels: outChannels, outChannels: outChannels, kernelSize: kernelSize, stride: 1, groups: outChannels, activation: "relu")
+        _conv1.wrappedValue = HGNetV2ConvLayer(
+            inChannels: inChannels, outChannels: outChannels, kernelSize: 1, stride: 1, groups: 1, activation: nil)
+        _conv2.wrappedValue = HGNetV2ConvLayer(
+            inChannels: outChannels, outChannels: outChannels, kernelSize: kernelSize, stride: 1, groups: outChannels,
+            activation: "relu")
         super.init()
     }
 
@@ -999,12 +1035,17 @@ final class HGNetV2Embeddings: Module, UnaryLayer {
     private let pool = MaxPool2d(kernelSize: 2, stride: 1, padding: 0)
 
     override init() {
-        
-        _stem1.wrappedValue = HGNetV2ConvLayer(inChannels: 3, outChannels: 32, kernelSize: 3, stride: 2, activation: "relu")
-        _stem2a.wrappedValue = HGNetV2ConvLayer(inChannels: 32, outChannels: 16, kernelSize: 2, stride: 1, activation: "relu")
-        _stem2b.wrappedValue = HGNetV2ConvLayer(inChannels: 16, outChannels: 32, kernelSize: 2, stride: 1, activation: "relu")
-        _stem3.wrappedValue = HGNetV2ConvLayer(inChannels: 64, outChannels: 32, kernelSize: 3, stride: 2, activation: "relu")
-        _stem4.wrappedValue = HGNetV2ConvLayer(inChannels: 32, outChannels: 48, kernelSize: 1, stride: 1, activation: "relu")
+
+        _stem1.wrappedValue = HGNetV2ConvLayer(
+            inChannels: 3, outChannels: 32, kernelSize: 3, stride: 2, activation: "relu")
+        _stem2a.wrappedValue = HGNetV2ConvLayer(
+            inChannels: 32, outChannels: 16, kernelSize: 2, stride: 1, activation: "relu")
+        _stem2b.wrappedValue = HGNetV2ConvLayer(
+            inChannels: 16, outChannels: 32, kernelSize: 2, stride: 1, activation: "relu")
+        _stem3.wrappedValue = HGNetV2ConvLayer(
+            inChannels: 64, outChannels: 32, kernelSize: 3, stride: 2, activation: "relu")
+        _stem4.wrappedValue = HGNetV2ConvLayer(
+            inChannels: 32, outChannels: 48, kernelSize: 1, stride: 1, activation: "relu")
         super.init()
     }
 
@@ -1031,12 +1072,15 @@ final class HGNetV2BasicLayer: Module, UnaryLayer {
         self.residual = residual
         _layers.wrappedValue = (0..<layerNum).map { i in
             let inC = (i == 0) ? inChannels : middleChannels
-            return HGNetV2ConvLayer(inChannels: inC, outChannels: middleChannels, kernelSize: kernelSize, stride: 1, activation: "relu")
+            return HGNetV2ConvLayer(
+                inChannels: inC, outChannels: middleChannels, kernelSize: kernelSize, stride: 1, activation: "relu")
         }
 
         let totalChannels = inChannels + layerNum * middleChannels
-        let squeeze = HGNetV2ConvLayer(inChannels: totalChannels, outChannels: outChannels / 2, kernelSize: 1, stride: 1, activation: "relu")
-        let excite = HGNetV2ConvLayer(inChannels: outChannels / 2, outChannels: outChannels, kernelSize: 1, stride: 1, activation: "relu")
+        let squeeze = HGNetV2ConvLayer(
+            inChannels: totalChannels, outChannels: outChannels / 2, kernelSize: 1, stride: 1, activation: "relu")
+        let excite = HGNetV2ConvLayer(
+            inChannels: outChannels / 2, outChannels: outChannels, kernelSize: 1, stride: 1, activation: "relu")
         _aggregation.wrappedValue = [squeeze, excite]
         super.init()
     }
@@ -1074,8 +1118,10 @@ final class HGNetV2BasicLayerLight: Module, UnaryLayer {
         }
 
         let totalChannels = inChannels + layerNum * middleChannels
-        let squeeze = HGNetV2ConvLayer(inChannels: totalChannels, outChannels: outChannels / 2, kernelSize: 1, stride: 1, activation: "relu")
-        let excite = HGNetV2ConvLayer(inChannels: outChannels / 2, outChannels: outChannels, kernelSize: 1, stride: 1, activation: "relu")
+        let squeeze = HGNetV2ConvLayer(
+            inChannels: totalChannels, outChannels: outChannels / 2, kernelSize: 1, stride: 1, activation: "relu")
+        let excite = HGNetV2ConvLayer(
+            inChannels: outChannels / 2, outChannels: outChannels, kernelSize: 1, stride: 1, activation: "relu")
         _aggregation.wrappedValue = [squeeze, excite]
         super.init()
     }
@@ -1115,7 +1161,9 @@ final class HGNetV2Stage: Module, UnaryLayer {
         kernelSize: Int
     ) {
         if downsample {
-            _downsample.wrappedValue = HGNetV2ConvLayer(inChannels: inChannels, outChannels: inChannels, kernelSize: 3, stride: 2, groups: inChannels, activation: nil)
+            _downsample.wrappedValue = HGNetV2ConvLayer(
+                inChannels: inChannels, outChannels: inChannels, kernelSize: 3, stride: 2, groups: inChannels,
+                activation: nil)
         } else {
             _downsample.wrappedValue = Identity()
         }
@@ -1126,9 +1174,15 @@ final class HGNetV2Stage: Module, UnaryLayer {
             let inC = (i == 0) ? inChannels : outChannels
             let residual = (i != 0)
             if lightBlock {
-                out.append(HGNetV2BasicLayerLight(inChannels: inC, middleChannels: midChannels, outChannels: outChannels, layerNum: numLayers, kernelSize: kernelSize, residual: residual))
+                out.append(
+                    HGNetV2BasicLayerLight(
+                        inChannels: inC, middleChannels: midChannels, outChannels: outChannels, layerNum: numLayers,
+                        kernelSize: kernelSize, residual: residual))
             } else {
-                out.append(HGNetV2BasicLayer(inChannels: inC, middleChannels: midChannels, outChannels: outChannels, layerNum: numLayers, kernelSize: kernelSize, residual: residual))
+                out.append(
+                    HGNetV2BasicLayer(
+                        inChannels: inC, middleChannels: midChannels, outChannels: outChannels, layerNum: numLayers,
+                        kernelSize: kernelSize, residual: residual))
             }
         }
         _blocks.wrappedValue = out
@@ -1158,20 +1212,20 @@ final class HGNetV2Encoder: Module {
     @ModuleInfo(key: "stages") var stages: [HGNetV2Stage]
 
     override init() {
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         _stages.wrappedValue = [
-            HGNetV2Stage(inChannels: 48, midChannels: 48, outChannels: 128, numBlocks: 1, numLayers: 6, downsample: false, lightBlock: false, kernelSize: 3),
-            HGNetV2Stage(inChannels: 128, midChannels: 96, outChannels: 512, numBlocks: 1, numLayers: 6, downsample: true, lightBlock: false, kernelSize: 3),
-            HGNetV2Stage(inChannels: 512, midChannels: 192, outChannels: 1024, numBlocks: 3, numLayers: 6, downsample: true, lightBlock: true, kernelSize: 5),
-            HGNetV2Stage(inChannels: 1024, midChannels: 384, outChannels: 2048, numBlocks: 1, numLayers: 6, downsample: true, lightBlock: true, kernelSize: 5),
+            HGNetV2Stage(
+                inChannels: 48, midChannels: 48, outChannels: 128, numBlocks: 1, numLayers: 6, downsample: false,
+                lightBlock: false, kernelSize: 3),
+            HGNetV2Stage(
+                inChannels: 128, midChannels: 96, outChannels: 512, numBlocks: 1, numLayers: 6, downsample: true,
+                lightBlock: false, kernelSize: 3),
+            HGNetV2Stage(
+                inChannels: 512, midChannels: 192, outChannels: 1024, numBlocks: 3, numLayers: 6, downsample: true,
+                lightBlock: true, kernelSize: 5),
+            HGNetV2Stage(
+                inChannels: 1024, midChannels: 384, outChannels: 2048, numBlocks: 1, numLayers: 6, downsample: true,
+                lightBlock: true, kernelSize: 5),
         ]
         super.init()
     }
@@ -1234,8 +1288,6 @@ final class PPDocLayoutV3ConvEncoder: Module {
     }
 }
 
-
-
 final class PPDocLayoutV3Model: Module {
     @ModuleInfo(key: "backbone") var backbone: PPDocLayoutV3ConvEncoder
     @ModuleInfo(key: "encoder_input_proj") var encoderInputProj: [PPDocLayoutV3ConvBN]
@@ -1259,11 +1311,16 @@ final class PPDocLayoutV3Model: Module {
         self.config = config
         _backbone.wrappedValue = PPDocLayoutV3ConvEncoder(config: config)
 
-        
         _encoderInputProj.wrappedValue = [
-            PPDocLayoutV3ConvBN(config: config, inChannels: 512, outChannels: config.encoderHiddenDim, kernelSize: 1, stride: 1, padding: 0, bias: false),
-            PPDocLayoutV3ConvBN(config: config, inChannels: 1024, outChannels: config.encoderHiddenDim, kernelSize: 1, stride: 1, padding: 0, bias: false),
-            PPDocLayoutV3ConvBN(config: config, inChannels: 2048, outChannels: config.encoderHiddenDim, kernelSize: 1, stride: 1, padding: 0, bias: false),
+            PPDocLayoutV3ConvBN(
+                config: config, inChannels: 512, outChannels: config.encoderHiddenDim, kernelSize: 1, stride: 1,
+                padding: 0, bias: false),
+            PPDocLayoutV3ConvBN(
+                config: config, inChannels: 1024, outChannels: config.encoderHiddenDim, kernelSize: 1, stride: 1,
+                padding: 0, bias: false),
+            PPDocLayoutV3ConvBN(
+                config: config, inChannels: 2048, outChannels: config.encoderHiddenDim, kernelSize: 1, stride: 1,
+                padding: 0, bias: false),
         ]
 
         _encoder.wrappedValue = PPDocLayoutV3HybridEncoder(config: config)
@@ -1276,28 +1333,39 @@ final class PPDocLayoutV3Model: Module {
         _encBBoxHead.wrappedValue = PPDocLayoutV3MLPPredictionHead(config.dModel, config.dModel, 4, numLayers: 3)
 
         _decoderInputProj.wrappedValue = [
-            PPDocLayoutV3ConvBN(config: config, inChannels: 256, outChannels: config.dModel, kernelSize: 1, stride: 1, padding: 0, bias: false),
-            PPDocLayoutV3ConvBN(config: config, inChannels: 256, outChannels: config.dModel, kernelSize: 1, stride: 1, padding: 0, bias: false),
-            PPDocLayoutV3ConvBN(config: config, inChannels: 256, outChannels: config.dModel, kernelSize: 1, stride: 1, padding: 0, bias: false),
+            PPDocLayoutV3ConvBN(
+                config: config, inChannels: 256, outChannels: config.dModel, kernelSize: 1, stride: 1, padding: 0,
+                bias: false),
+            PPDocLayoutV3ConvBN(
+                config: config, inChannels: 256, outChannels: config.dModel, kernelSize: 1, stride: 1, padding: 0,
+                bias: false),
+            PPDocLayoutV3ConvBN(
+                config: config, inChannels: 256, outChannels: config.dModel, kernelSize: 1, stride: 1, padding: 0,
+                bias: false),
         ]
         _decoder.wrappedValue = PPDocLayoutV3Decoder(config: config)
 
-        _decoderOrderHead.wrappedValue = (0..<config.decoderLayers).map { _ in Linear(config.dModel, config.dModel, bias: true) }
+        _decoderOrderHead.wrappedValue = (0..<config.decoderLayers).map { _ in
+            Linear(config.dModel, config.dModel, bias: true)
+        }
         _decoderGlobalPointer.wrappedValue = PPDocLayoutV3GlobalPointer(config: config)
         _decoderNorm.wrappedValue = LayerNorm(dimensions: config.dModel, eps: config.layerNormEps)
-        _maskQueryHead.wrappedValue = PPDocLayoutV3MLPPredictionHead(config.dModel, config.dModel, config.numPrototypes, numLayers: 3)
+        _maskQueryHead.wrappedValue = PPDocLayoutV3MLPPredictionHead(
+            config.dModel, config.dModel, config.numPrototypes, numLayers: 3)
 
         super.init()
     }
 
-    private func generateAnchors(spatialShapes: [(height: Int, width: Int)], gridSize: Float = 0.05, dtype: DType) -> (anchors: MLXArray, validMask: MLXArray) {
+    private func generateAnchors(spatialShapes: [(height: Int, width: Int)], gridSize: Float = 0.05, dtype: DType) -> (
+        anchors: MLXArray, validMask: MLXArray
+    ) {
         var anchors: [MLXArray] = []
         anchors.reserveCapacity(spatialShapes.count)
 
         for (level, (h, w)) in spatialShapes.enumerated() {
             let gridX = broadcast(arange(w, dtype: .float32).reshaped(1, w), to: [h, w])
             let gridY = broadcast(arange(h, dtype: .float32).reshaped(h, 1), to: [h, w])
-            var grid = stacked([gridX, gridY], axis: -1) 
+            var grid = stacked([gridX, gridY], axis: -1)
             grid = (grid + 0.5)
             grid[0..., 0..., 0] = grid[0..., 0..., 0] / Float(w)
             grid[0..., 0..., 1] = grid[0..., 0..., 1] / Float(h)
@@ -1319,13 +1387,13 @@ final class PPDocLayoutV3Model: Module {
     }
 
     func callAsFunction(pixelValues: MLXArray) -> PPDocLayoutV3ForObjectDetectionOutput {
-        
+
         let batch = pixelValues.dim(0)
 
-        let features = backbone(pixelValues) 
+        let features = backbone(pixelValues)
         precondition(features.count == 4, "Expected 4 backbone feature maps")
         let x4Feat = features[0]
-        let stages = Array(features.dropFirst()) 
+        let stages = Array(features.dropFirst())
 
         var projFeats: [MLXArray] = []
         projFeats.reserveCapacity(stages.count)
@@ -1341,7 +1409,6 @@ final class PPDocLayoutV3Model: Module {
             sources.append(decoderInputProj[i](src))
         }
 
-        
         var sourceFlatten: [MLXArray] = []
         sourceFlatten.reserveCapacity(sources.count)
         var spatialShapes: [(height: Int, width: Int)] = []
@@ -1365,24 +1432,23 @@ final class PPDocLayoutV3Model: Module {
         let encOutputsClass = encScoreHead(outputMemory)
         let encOutputsCoordLogits = encBBoxHead(outputMemory) + anchors
 
-        
-        let scoresMax = encOutputsClass.max(axis: -1) 
+        let scoresMax = encOutputsClass.max(axis: -1)
         let topk = ppdoclayoutTopKIndices(scoresMax, k: config.numQueries)
 
-        let referencePointsUnact = ppdoclayoutGather3D(encOutputsCoordLogits, indices: topk) 
-        let target = ppdoclayoutGather3D(outputMemory, indices: topk) 
+        let referencePointsUnact = ppdoclayoutGather3D(encOutputsCoordLogits, indices: topk)
+        let target = ppdoclayoutGather3D(outputMemory, indices: topk)
 
         let outQuery = decoderNorm(target)
-        let maskQueryEmbed = maskQueryHead(outQuery) 
+        let maskQueryEmbed = maskQueryHead(outQuery)
 
         var initReferencePointsUnact = referencePointsUnact
         if config.maskEnhanced {
-            let maskFeat = encoderOut.maskFeat 
+            let maskFeat = encoderOut.maskFeat
             let maskH = maskFeat.dim(1)
             let maskW = maskFeat.dim(2)
             let proto = maskFeat.dim(3)
 
-            let maskFlat = maskFeat.reshaped(batch, maskH * maskW, proto).transposed(0, 2, 1) 
+            let maskFlat = maskFeat.reshaped(batch, maskH * maskW, proto).transposed(0, 2, 1)
             let encOutMasks = matmul(maskQueryEmbed, maskFlat).reshaped(batch, config.numQueries, maskH, maskW)
             let ref = ppdoclayoutMaskToBoxCoordinate(encOutMasks .> 0, dtype: initReferencePointsUnact.dtype)
             initReferencePointsUnact = ppdoclayoutInverseSigmoid(ref)
@@ -1424,10 +1490,8 @@ final class PPDocLayoutV3ForObjectDetection: Module {
     }
 }
 
-
-
 private func ppdoclayoutGather3D(_ array: MLXArray, indices: MLXArray) -> MLXArray {
-    
+
     precondition(array.ndim == 3)
     precondition(indices.ndim == 2)
     let b = array.dim(0)
@@ -1439,15 +1503,15 @@ private func ppdoclayoutGather3D(_ array: MLXArray, indices: MLXArray) -> MLXArr
 }
 
 private func ppdoclayoutTopKIndices(_ values: MLXArray, k: Int) -> MLXArray {
-    
+
     precondition(values.ndim == 2)
     let neg = -values
-    let sortedIdx = argSort(neg, axis: -1) 
+    let sortedIdx = argSort(neg, axis: -1)
     return sortedIdx[0..., 0..<k]
 }
 
 private func ppdoclayoutMaskToBoxCoordinate(_ mask: MLXArray, dtype: DType) -> MLXArray {
-    
+
     precondition(mask.ndim == 4)
     let h = mask.dim(2)
     let w = mask.dim(3)

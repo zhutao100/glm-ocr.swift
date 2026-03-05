@@ -182,8 +182,8 @@ public final class GLMOCRDocumentParser {
         for (pageIndex, (image, detections)) in zip(images, detectionsBatch).enumerated() {
             let globalPageIndex = pageOffset + pageIndex + 1
             if let maxRegionsPerPage = config.maxRegionsPerPage,
-               maxRegionsPerPage > 0,
-               detections.count > maxRegionsPerPage
+                maxRegionsPerPage > 0,
+                detections.count > maxRegionsPerPage
             {
                 throw GLMOCRDocumentParserError.tooManyRegions(
                     detected: detections.count,
@@ -334,12 +334,13 @@ public final class GLMOCRDocumentParser {
                 case .text, .table, .formula:
                     pendingOCRCount += 1
                     let prompt = prompt(for: task, prompts: config.prompts)
-                    let configuredMaxNewTokens: Int = switch task {
-                    case .text: config.maxNewTokensTextPerRegion ?? config.maxNewTokensPerRegion
-                    case .table: config.maxNewTokensTablePerRegion ?? config.maxNewTokensPerRegion
-                    case .formula: config.maxNewTokensFormulaPerRegion ?? config.maxNewTokensPerRegion
-                    default: config.maxNewTokensPerRegion
-                    }
+                    let configuredMaxNewTokens: Int =
+                        switch task {
+                        case .text: config.maxNewTokensTextPerRegion ?? config.maxNewTokensPerRegion
+                        case .table: config.maxNewTokensTablePerRegion ?? config.maxNewTokensPerRegion
+                        case .formula: config.maxNewTokensFormulaPerRegion ?? config.maxNewTokensPerRegion
+                        default: config.maxNewTokensPerRegion
+                        }
                     let maxNewTokensForRegion = Self.effectiveMaxNewTokensForRegion(
                         task: task,
                         nativeLabel: nativeLabel,
@@ -537,12 +538,12 @@ public final class GLMOCRDocumentParser {
         }
 
         if let mask,
-           let masked = Self.apply(
-               mask: mask,
-               toCrop: cg,
-               inImageSize: (width: width, height: height),
-               cropOriginPx: (x: x1, y: y1)
-           )
+            let masked = Self.apply(
+                mask: mask,
+                toCrop: cg,
+                inImageSize: (width: width, height: height),
+                cropOriginPx: (x: x1, y: y1)
+            )
         {
             return masked
         }
@@ -572,15 +573,17 @@ public final class GLMOCRDocumentParser {
             guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) else { return }
 
             let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
-            guard let context = CGContext(
-                data: baseAddress,
-                width: cropWidth,
-                height: cropHeight,
-                bitsPerComponent: 8,
-                bytesPerRow: bytesPerRow,
-                space: colorSpace,
-                bitmapInfo: bitmapInfo
-            ) else { return }
+            guard
+                let context = CGContext(
+                    data: baseAddress,
+                    width: cropWidth,
+                    height: cropHeight,
+                    bitsPerComponent: 8,
+                    bytesPerRow: bytesPerRow,
+                    space: colorSpace,
+                    bitmapInfo: bitmapInfo
+                )
+            else { return }
 
             context.setAllowsAntialiasing(false)
             context.setShouldAntialias(false)
@@ -739,12 +742,14 @@ public final class GLMOCRDocumentParser {
     ) -> CGImage? {
         let cropWidth = crop.width
         let cropHeight = crop.height
-        guard let cropMask = Self.resizedMaskForCrop(
-            mask: mask,
-            cropSize: (width: cropWidth, height: cropHeight),
-            inImageSize: imageSize,
-            cropOriginPx: cropOriginPx
-        ) else { return nil }
+        guard
+            let cropMask = Self.resizedMaskForCrop(
+                mask: mask,
+                cropSize: (width: cropWidth, height: cropHeight),
+                inImageSize: imageSize,
+                cropOriginPx: cropOriginPx
+            )
+        else { return nil }
 
         let bytesPerPixel = 4
         let bytesPerRow = cropWidth * bytesPerPixel
@@ -754,15 +759,17 @@ public final class GLMOCRDocumentParser {
             guard let baseAddress = ptr.baseAddress else { return }
             guard let colorSpace = CGColorSpace(name: CGColorSpace.sRGB) else { return }
             let bitmapInfo = CGBitmapInfo.byteOrder32Big.rawValue | CGImageAlphaInfo.premultipliedLast.rawValue
-            guard let context = CGContext(
-                data: baseAddress,
-                width: cropWidth,
-                height: cropHeight,
-                bitsPerComponent: 8,
-                bytesPerRow: bytesPerRow,
-                space: colorSpace,
-                bitmapInfo: bitmapInfo
-            ) else { return }
+            guard
+                let context = CGContext(
+                    data: baseAddress,
+                    width: cropWidth,
+                    height: cropHeight,
+                    bitsPerComponent: 8,
+                    bytesPerRow: bytesPerRow,
+                    space: colorSpace,
+                    bitmapInfo: bitmapInfo
+                )
+            else { return }
 
             context.interpolationQuality = .none
             context.draw(crop, in: CGRect(x: 0, y: 0, width: cropWidth, height: cropHeight))
@@ -816,7 +823,6 @@ public final class GLMOCRDocumentParser {
         let cropMaskH = ye - ys
         guard cropMaskW > 0, cropMaskH > 0 else { return nil }
 
-        
         var out = [UInt8](repeating: 0, count: cropWidth * cropHeight)
         for y in 0..<cropHeight {
             let srcYOffset = Int(Double(y) * Double(cropMaskH) / Double(cropHeight))

@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import GLMOCR
 
 final class PPDocLayoutV3LayoutPostprocessTests: XCTestCase {
@@ -87,7 +88,7 @@ final class PPDocLayoutV3LayoutPostprocessTests: XCTestCase {
             scores: [0.9],
             labels: [22],
             boxes: [
-                [10, 10, 30, 30],
+                [10, 10, 30, 30]
             ],
             orderSeq: [1]
         )

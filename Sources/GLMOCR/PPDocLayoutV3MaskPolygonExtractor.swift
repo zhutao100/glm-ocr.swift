@@ -62,7 +62,6 @@ struct PPDocLayoutV3MaskPolygonExtractor {
             }
         }
 
-        
         var resized = [UInt8](repeating: 0, count: boxW * boxH)
         for y in 0..<boxH {
             let srcY = Int(Double(y) * Double(cropMaskH) / Double(boxH))
@@ -81,7 +80,8 @@ struct PPDocLayoutV3MaskPolygonExtractor {
         let rawContour = traceContour(mask: resized, width: boxW, height: boxH, start: start)
         guard !rawContour.isEmpty else { return nil }
 
-        let contour = chainApproxSimple(rotateContourStartOpenCVLike(ensureOpenCVExternalContourOrientation(rawContour)))
+        let contour = chainApproxSimple(
+            rotateContourStartOpenCVLike(ensureOpenCVExternalContourOrientation(rawContour)))
         guard !contour.isEmpty else { return nil }
 
         let arc = arcLength(contour, closed: true)
@@ -198,7 +198,7 @@ struct PPDocLayoutV3MaskPolygonExtractor {
             let dy = b.y - p.y
             let bIndex: Int = {
                 for (i, d) in dirs.enumerated() where d.dx == dx && d.dy == dy { return i }
-                return 4 
+                return 4
             }()
 
             var found: (next: IntPoint, newBacktrack: IntPoint)?
@@ -229,7 +229,6 @@ struct PPDocLayoutV3MaskPolygonExtractor {
             }
         }
 
-        
         if contour.count >= 2, contour.first == contour.last {
             contour.removeLast()
         }
@@ -290,8 +289,7 @@ struct PPDocLayoutV3MaskPolygonExtractor {
 
     private static func ensureOpenCVExternalContourOrientation(_ points: [DPoint]) -> [DPoint] {
         guard points.count >= 3 else { return points }
-        
-        
+
         if signedArea(points) > 0 {
             return Array(points.reversed())
         }
@@ -328,7 +326,6 @@ struct PPDocLayoutV3MaskPolygonExtractor {
         return approxPolyDPClosedOpenCV(points, epsilon: max(0, epsilon))
     }
 
-    
     private static func approxPolyDPClosedOpenCV(_ points: [DPoint], epsilon: Double) -> [DPoint] {
         let count0 = points.count
         guard count0 > 0 else { return [] }
@@ -369,7 +366,6 @@ struct PPDocLayoutV3MaskPolygonExtractor {
             return out
         }
 
-        
         rightSlice.start = 0
         for _ in 0..<initIters {
             var maxDist = 0.0
@@ -388,7 +384,6 @@ struct PPDocLayoutV3MaskPolygonExtractor {
             leEps = maxDist <= eps
         }
 
-        
         if !leEps {
             let start = pos % count0
             slice.start = start
@@ -402,7 +397,6 @@ struct PPDocLayoutV3MaskPolygonExtractor {
             dst.append(startPt)
         }
 
-        
         while let current = stack.popLast() {
             slice = current
             endPt = points[slice.end]
@@ -471,8 +465,7 @@ struct PPDocLayoutV3MaskPolygonExtractor {
             let dy = endPt.y - startPt.y
             let dist = abs((pt.x - startPt.x) * dy - (pt.y - startPt.y) * dx)
             let successiveInnerProduct =
-                (pt.x - startPt.x) * (endPt.x - pt.x) +
-                (pt.y - startPt.y) * (endPt.y - pt.y)
+                (pt.x - startPt.x) * (endPt.x - pt.x) + (pt.y - startPt.y) * (endPt.y - pt.y)
 
             if dist * dist <= 0.5 * eps * (dx * dx + dy * dy) && dx != 0 && dy != 0 && successiveInnerProduct >= 0 {
                 newCount -= 1
@@ -520,7 +513,6 @@ struct PPDocLayoutV3MaskPolygonExtractor {
         guard points.count >= 3 else { return points }
         if points.count == 3 { return points }
 
-        
         let first = points[0]
         var splitIndex = 0
         var best = -Double.infinity
@@ -553,7 +545,6 @@ struct PPDocLayoutV3MaskPolygonExtractor {
             out.append(contentsOf: s2.dropLast())
         }
 
-        
         var deduped: [DPoint] = []
         deduped.reserveCapacity(out.count)
         for p in out {

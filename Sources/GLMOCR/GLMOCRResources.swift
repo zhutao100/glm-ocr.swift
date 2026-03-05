@@ -147,7 +147,8 @@ public struct GLMOCRResources {
 
     public init(modelURL: URL, strictTokenizer: Bool = true) async throws {
         self.modelURL = modelURL
-        self.modelConfig = try Self.decodeJSON(GLMOCRModelConfig.self, from: modelURL.appendingPathComponent("config.json"))
+        self.modelConfig = try Self.decodeJSON(
+            GLMOCRModelConfig.self, from: modelURL.appendingPathComponent("config.json"))
         self.preprocessorConfig = try Self.decodeJSON(
             GLMOCRPreprocessorConfig.self,
             from: modelURL.appendingPathComponent("preprocessor_config.json")

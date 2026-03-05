@@ -219,13 +219,11 @@ public struct GLMOCRResultFormatter: Sendable {
         while content.hasSuffix("\\t") { content = String(content.dropLast(2)) }
         content = content.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        
         content = content.replacingOccurrences(of: #"(\.)\1{2,}"#, with: "$1$1$1", options: [.regularExpression])
         content = content.replacingOccurrences(of: #"(·)\1{2,}"#, with: "$1$1$1", options: [.regularExpression])
         content = content.replacingOccurrences(of: #"(_)\1{2,}"#, with: "$1$1$1", options: [.regularExpression])
         content = content.replacingOccurrences(of: #"(\\_)\1{2,}"#, with: "$1$1$1", options: [.regularExpression])
 
-        
         if content.count >= 2048 {
             content = cleanRepeatedContent(content)
         }
@@ -399,17 +397,17 @@ public struct GLMOCRResultFormatter: Sendable {
             let next = formatted[i + 1]
 
             guard current.nativeLabel == "text",
-                  prev.nativeLabel == "text",
-                  next.nativeLabel == "text",
-                  let currentContent = current.content,
-                  let prevContent = prev.content,
-                  let nextContent = next.content,
-                  !currentContent.hasPrefix("- "),
-                  prevContent.hasPrefix("- "),
-                  nextContent.hasPrefix("- "),
-                  let currentBBox = current.bbox2D, currentBBox.count >= 1,
-                  let prevBBox = prev.bbox2D, prevBBox.count >= 1,
-                  let nextBBox = next.bbox2D, nextBBox.count >= 1
+                prev.nativeLabel == "text",
+                next.nativeLabel == "text",
+                let currentContent = current.content,
+                let prevContent = prev.content,
+                let nextContent = next.content,
+                !currentContent.hasPrefix("- "),
+                prevContent.hasPrefix("- "),
+                nextContent.hasPrefix("- "),
+                let currentBBox = current.bbox2D, currentBBox.count >= 1,
+                let prevBBox = prev.bbox2D, prevBBox.count >= 1,
+                let nextBBox = next.bbox2D, nextBBox.count >= 1
             else {
                 continue
             }
@@ -419,7 +417,7 @@ public struct GLMOCRResultFormatter: Sendable {
             let nextLeft = Double(nextBBox[0])
 
             if abs(currentLeft - prevLeft) <= leftAlignThreshold,
-               abs(currentLeft - nextLeft) <= leftAlignThreshold
+                abs(currentLeft - nextLeft) <= leftAlignThreshold
             {
                 current.content = "- " + currentContent
                 formatted[i] = current
@@ -439,12 +437,13 @@ public struct GLMOCRResultFormatter: Sendable {
         guard !stripped.isEmpty else { return content }
 
         if stripped.count > minLen * minRepeats,
-           let repeatCleaned = findConsecutiveRepeat(stripped, minUnitLen: minLen, minRepeats: minRepeats)
+            let repeatCleaned = findConsecutiveRepeat(stripped, minUnitLen: minLen, minRepeats: minRepeats)
         {
             return repeatCleaned
         }
 
-        let lines = content
+        let lines =
+            content
             .split(separator: "\n", omittingEmptySubsequences: false)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
@@ -489,17 +488,19 @@ public struct GLMOCRResultFormatter: Sendable {
         guard maxUnitLen >= minUnitLen else { return nil }
 
         let pattern = "(.{\(minUnitLen),\(maxUnitLen)}?)\\\\1{\(minRepeats - 1),}"
-        guard let regex = try? NSRegularExpression(
-            pattern: pattern,
-            options: [.dotMatchesLineSeparators]
-        ) else {
+        guard
+            let regex = try? NSRegularExpression(
+                pattern: pattern,
+                options: [.dotMatchesLineSeparators]
+            )
+        else {
             return nil
         }
 
         let ns = string as NSString
         let range = NSRange(location: 0, length: ns.length)
         guard let match = regex.firstMatch(in: string, options: [], range: range),
-              match.numberOfRanges >= 2
+            match.numberOfRanges >= 2
         else {
             return nil
         }

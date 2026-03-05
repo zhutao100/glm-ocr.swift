@@ -202,9 +202,11 @@ final class GLMOCRTextDecoderLayer: Module {
         cache: GLMOCRKVCache?,
         positionEmbeddings: (cos: MLXArray, sin: MLXArray)
     ) -> MLXArray {
-        var x = x + postSelfAttnLayerNorm(
-            selfAttn(inputLayerNorm(x), mask: mask, cache: cache, positionEmbeddings: positionEmbeddings)
-        )
+        var x =
+            x
+            + postSelfAttnLayerNorm(
+                selfAttn(inputLayerNorm(x), mask: mask, cache: cache, positionEmbeddings: positionEmbeddings)
+            )
         let residual = x
         x = postMlpLayerNorm(mlp(postAttentionLayerNorm(x))) + residual
         return x
@@ -253,7 +255,7 @@ final class GLMOCRTextModel: Module {
             precondition(attentionMask.dim(0) == batch, "attentionMask batch mismatch")
             let keyLen = cacheOffset + seqLen
             precondition(attentionMask.dim(1) >= keyLen, "attentionMask length must cover cached keys")
-            let queryMask2d = (attentionMask[0..., cacheOffset ..< keyLen] .== 1)
+            let queryMask2d = (attentionMask[0..., cacheOffset..<keyLen] .== 1)
             return queryMask2d.expandedDimensions(axis: 2)
         }()
 
@@ -276,7 +278,7 @@ final class GLMOCRTextModel: Module {
             let keyLen = cacheOffset + seqLen
             precondition(attentionMask.dim(1) >= keyLen, "attentionMask length must cover cached keys")
 
-            let keyMask = (attentionMask[0..., 0 ..< keyLen] .== 1)
+            let keyMask = (attentionMask[0..., 0..<keyLen] .== 1)
             let keyMask4d = keyMask.expandedDimensions(axis: 1).expandedDimensions(axis: 1)
             let maskDType = hidden.dtype
             let keyAdditiveMask4d = which(
@@ -302,7 +304,6 @@ final class GLMOCRTextModel: Module {
         let positionIds: MLXArray = {
             if let positionIds { return positionIds }
 
-            
             let offset = cache?.first?.offset ?? 0
             var base = MLXArray(stride(from: offset, to: offset + seqLen, by: 1)).asType(.int32)
             base = tiled(base[.newAxis, 0...], repetitions: [batch, 1])
@@ -321,14 +322,14 @@ final class GLMOCRTextModel: Module {
     }
 }
 
-private extension GLMOCRTextModel {
-    static func createCausalMask(n: Int, offset: Int) -> MLXArray {
+extension GLMOCRTextModel {
+    fileprivate static func createCausalMask(n: Int, offset: Int) -> MLXArray {
         precondition(n >= 1, "createCausalMask expects n >= 1")
         precondition(offset >= 0, "createCausalMask expects offset >= 0")
 
         let keyLen = offset + n
-        var rinds = MLXArray(Int32(0) ..< Int32(keyLen))
-        let lrange = MLXArray(Int32(offset) ..< Int32(offset + n))
+        var rinds = MLXArray(Int32(0)..<Int32(keyLen))
+        let lrange = MLXArray(Int32(offset)..<Int32(offset + n))
         let linds = lrange[0..., .newAxis]
         rinds = rinds[.newAxis]
         return linds .>= rinds

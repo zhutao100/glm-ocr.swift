@@ -1,5 +1,6 @@
 import CoreImage
 import XCTest
+
 @testable import GLMOCR
 
 final class GLMOCRImageProcessorTests: XCTestCase {
@@ -48,7 +49,7 @@ final class GLMOCRImageProcessorTests: XCTestCase {
         let context = CIContext()
 
         guard let cgImage1 = context.createCGImage(image1, from: image1.extent),
-              let cgImage2 = context.createCGImage(image2, from: image2.extent)
+            let cgImage2 = context.createCGImage(image2, from: image2.extent)
         else {
             XCTFail("Failed to build test CGImages")
             return
