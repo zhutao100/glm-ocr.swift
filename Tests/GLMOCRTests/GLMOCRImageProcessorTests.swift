@@ -29,6 +29,8 @@ final class GLMOCRImageProcessorTests: XCTestCase {
     }
 
     func testProcessBatchMatchesSingleProcessForCGImages() throws {
+        try ensureMLXMetalLibraryColocated(for: Self.self)
+
         let config = GLMOCRPreprocessorConfig(
             size: .init(shortestEdge: 112 * 112, longestEdge: 28 * 28 * 15000),
             doRescale: true,
