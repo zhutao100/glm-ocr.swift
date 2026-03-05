@@ -37,16 +37,28 @@ Override the GPU cache limit (MB):
 glm-ocr ocr --cache-limit 1024 --input /path/to/image.png
 ```
 
-Run layout + parse (writes `<output-dir>/<stem>/{result.md,result.json}`):
+Run layout + parse (writes `<output-dir>/<stem>/{result.md,result.json}` by default):
 
 ```bash
 glm-ocr parse --input /path/to/image.png --output-dir outputs/parse
+```
+
+Use `<stem>.{md,json}` file names (needed for `tools/example_eval`):
+
+```bash
+glm-ocr parse --input /path/to/image.png --output-dir outputs/parse --output-naming stem
 ```
 
 Parse a directory of images:
 
 ```bash
 glm-ocr parse --input /path/to/images --output-dir outputs/parse
+```
+
+Continue on per-input errors (useful for batch runs):
+
+```bash
+glm-ocr parse --input /path/to/images --output-dir outputs/parse --continue-on-error
 ```
 
 Tune parse layout thresholds:
@@ -72,4 +84,18 @@ export PATH="$PWD/build/Build/Products/Debug:$PATH"
 glm-ocr --help
 glm-ocr help ocr
 glm-ocr help parse
+```
+
+## Examples regression loop
+
+Generate `examples/result/`:
+
+```bash
+scripts/run_examples.sh
+```
+
+Evaluate `examples/result/` against `examples/{reference_result,golden_result}/`:
+
+```bash
+uv run --project tools/example_eval example-eval evaluate --repo-root .
 ```

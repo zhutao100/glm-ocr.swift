@@ -205,6 +205,11 @@ struct GLMOCRCLI: AsyncParsableCommand {
             abstract: "Run layout + OCR parse and output default markdown/json results."
         )
 
+        enum OutputNaming: String, CaseIterable, ExpressibleByArgument {
+            case result
+            case stem
+        }
+
         @OptionGroup var modelOptions: ModelOptions
         @OptionGroup var decoding: DecodingOptions
 
@@ -216,9 +221,23 @@ struct GLMOCRCLI: AsyncParsableCommand {
         var inputs: [String] = []
 
         @Option(
-            name: [.customLong("output-dir")], help: "Parse output directory containing <stem>/{result.md,result.json}."
+            name: [.customLong("output-dir")],
+            help:
+                "Parse output directory containing <stem>/{result.md,result.json}. Use --output-naming stem for <stem>/{<stem>.md,<stem>.json}."
         )
         var outputDir: String = "outputs/parse"
+
+        @Option(
+            name: [.customLong("output-naming")],
+            help: "Output file naming within each <stem>/ directory (result|stem)."
+        )
+        var outputNaming: OutputNaming = .result
+
+        @Flag(
+            name: [.customLong("continue-on-error")],
+            help: "Continue parsing remaining inputs when one fails."
+        )
+        var continueOnError: Bool = false
 
         @Option(
             name: [.customLong("jpeg-quality")],
@@ -377,37 +396,52 @@ struct GLMOCRCLI: AsyncParsableCommand {
 
                 let effectiveBatchSize = batchSize > 0 ? batchSize : imageURLs.count
 
+                var successCount = 0
+                var failureCount = 0
                 var start = 0
                 while start < imageURLs.count {
                     let end = min(start + effectiveBatchSize, imageURLs.count)
                     let chunk = Array(imageURLs[start..<end])
 
-                    try autoreleasepool {
-                        for url in chunk {
-                            eprintln("==> \(url.lastPathComponent)")
+                    for url in chunk {
+                        eprintln("==> \(url.lastPathComponent)")
 
-                            let pages = try loadCGImages(at: url.path, pdfMaxPages: pdfMaxPages)
-                            let result = try parser.parse(images: pages, config: parseConfig) { message in
-                                eprintln("  \(message)")
+                        do {
+                            try autoreleasepool {
+                                let pages = try loadCGImages(at: url.path, pdfMaxPages: pdfMaxPages)
+                                let result = try parser.parse(images: pages, config: parseConfig) { message in
+                                    eprintln("  \(message)")
+                                }
+
+                                let stem = url.deletingPathExtension().lastPathComponent
+                                let itemDir = outURL.appendingPathComponent(stem, isDirectory: true)
+                                let fileStem = outputNaming == .stem ? stem : "result"
+                                let outMD = itemDir.appendingPathComponent("\(fileStem).md")
+                                let outJSON = itemDir.appendingPathComponent("\(fileStem).json")
+
+                                try fm.createDirectory(at: itemDir, withIntermediateDirectories: true)
+                                try result.markdownResult.write(to: outMD, atomically: true, encoding: .utf8)
+                                let jsonText = renderParseJSON(result.jsonResult)
+                                try jsonText.write(to: outJSON, atomically: true, encoding: .utf8)
+                                eprintln("wrote \(stem)")
                             }
-
-                            let stem = url.deletingPathExtension().lastPathComponent
-                            let itemDir = outURL.appendingPathComponent(stem, isDirectory: true)
-                            let outMD = itemDir.appendingPathComponent("result.md")
-                            let outJSON = itemDir.appendingPathComponent("result.json")
-
-                            try fm.createDirectory(at: itemDir, withIntermediateDirectories: true)
-                            try result.markdownResult.write(to: outMD, atomically: true, encoding: .utf8)
-                            let jsonText = renderParseJSON(result.jsonResult)
-                            try jsonText.write(to: outJSON, atomically: true, encoding: .utf8)
-                            eprintln("wrote \(stem)")
+                            successCount += 1
+                        } catch {
+                            failureCount += 1
+                            eprintln("ERROR: \(url.lastPathComponent): \(error)")
+                            if !continueOnError {
+                                throw error
+                            }
                         }
                     }
 
                     start = end
                 }
 
-                eprintln("Wrote parse results for \(imageURLs.count) image(s) to \(outputDir)")
+                eprintln("Wrote parse results for \(successCount)/\(imageURLs.count) input(s) to \(outputDir)")
+                if failureCount > 0 {
+                    throw ExitCode(1)
+                }
             }
         }
     }
@@ -453,6 +487,12 @@ struct GLMOCRCLI: AsyncParsableCommand {
                 let contents = try fm.contentsOfDirectory(at: dirURL, includingPropertiesForKeys: nil)
                 let imageURLs =
                     contents
+                    .filter { url in
+                        let name = url.lastPathComponent
+                        if name == ".DS_Store" { return false }
+                        if name.hasPrefix("._") { return false }
+                        return true
+                    }
                     .filter { allowedExtensions.contains($0.pathExtension.lowercased()) }
                     .sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
                 guard !imageURLs.isEmpty else {

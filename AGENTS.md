@@ -74,3 +74,8 @@ pre-commit run -a
   - Use shell command `hf cache ls` to list model caches, `hf cache download [model-org]/[model-id]` to download models as needed.
 - The official github repo [GLM-OCR](https://github.com/zai-org/GLM-OCR/): accessible at `../GLM-OCR`
 - when inspecting the reference implementation in Python, use the virtual env `venv313` by pretending `PYENV_VERSION=venv313 pyenv exec ` to the command.
+
+## Examples parity/quality eval
+
+- Generate `examples/result/`: `scripts/run_examples.sh`
+- Evaluate: `uv run --project tools/example_eval example-eval evaluate --repo-root .`
