@@ -77,5 +77,9 @@ pre-commit run -a
 
 ## Examples parity/quality eval
 
-- Generate `examples/result/`: `scripts/run_examples.sh`
+Agentic loop (refresh → eval → record → compare): `scripts/verify_example_eval.sh`
+
+What it does:
+- Generate `examples/result/`: `scripts/run_examples.sh` (writes `examples/result/.run_examples_meta.json`)
 - Evaluate: `uv run --project tools/example_eval example-eval evaluate --repo-root .`
+- Record evaluator output: `python3 scripts/example_eval_record.py --repo-root .` (writes `examples/eval_records/latest/`)

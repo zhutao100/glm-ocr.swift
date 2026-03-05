@@ -92,6 +92,58 @@ for pdf_path in "$source_dir"/*.pdf; do
   mkdir -p "$result_dir/$pdf_stem/imgs"
 done
 
+# Write a small metadata file so workflows can detect whether `examples/result/` is up-to-date
+# for the current working tree.
+meta_path="$result_dir/.run_examples_meta.json"
+generated_at="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+head_sha="$(git rev-parse HEAD 2>/dev/null || true)"
+
+fingerprint=""
+if [[ -n "$head_sha" ]]; then
+  relevant_diff="$(git diff HEAD -- Package.swift Package.resolved Sources scripts/run_examples.sh scripts/build_mlx_metallib.sh examples/source 2>/dev/null || true)"
+  untracked="$(git ls-files --others --exclude-standard -- Package.swift Package.resolved Sources scripts/run_examples.sh scripts/build_mlx_metallib.sh examples/source 2>/dev/null || true)"
+  fingerprint="$(
+    { printf "%s\n" "$head_sha"; printf "%s\n" "$relevant_diff"; printf "%s\n" "$untracked" | LC_ALL=C sort; } \
+      | shasum -a 256 \
+      | awk '{print $1}'
+  )"
+fi
+
+head_sha_json="null"
+if [[ -n "$head_sha" ]]; then
+  head_sha_json="\"$head_sha\""
+fi
+
+fingerprint_json="null"
+if [[ -n "$fingerprint" ]]; then
+  fingerprint_json="\"$fingerprint\""
+fi
+
+clean_json="false"
+if [[ "$clean" -eq 1 ]]; then
+  clean_json="true"
+fi
+
+cat > "$meta_path" <<EOF
+{
+  "schema_version": 1,
+  "generated_at": "$generated_at",
+  "git_head_sha": $head_sha_json,
+  "fingerprint_sha256": $fingerprint_json,
+  "fingerprint_paths": [
+    "Package.swift",
+    "Package.resolved",
+    "Sources",
+    "scripts/run_examples.sh",
+    "scripts/build_mlx_metallib.sh",
+    "examples/source"
+  ],
+  "configuration": "$config",
+  "clean": $clean_json,
+  "parse_exit_code": $parse_status
+}
+EOF
+
 if [[ "$parse_status" -ne 0 ]]; then
   echo "Completed with errors (exit $parse_status). See stderr logs above." >&2
 fi

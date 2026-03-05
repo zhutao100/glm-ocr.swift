@@ -88,7 +88,17 @@ glm-ocr help parse
 
 ## Examples regression loop
 
-Generate `examples/result/`:
+### Recommended (agentic loop: refresh → eval → record → compare):
+
+```bash
+scripts/verify_example_eval.sh
+```
+
+This updates the persistent record under `examples/eval_records/latest/` (see `examples/eval_records/README.md`).
+
+### Manual (refresh + eval only):
+
+Generate `examples/result/` (also writes `examples/result/.run_examples_meta.json`):
 
 ```bash
 scripts/run_examples.sh
@@ -98,4 +108,10 @@ Evaluate `examples/result/` against `examples/{reference_result,golden_result}/`
 
 ```bash
 uv run --project tools/example_eval example-eval evaluate --repo-root .
+```
+
+Record the run output into `examples/eval_records/latest/`:
+
+```bash
+python3 scripts/example_eval_record.py --repo-root .
 ```

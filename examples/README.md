@@ -12,6 +12,15 @@
 From the repo root:
 
 ```bash
+scripts/verify_example_eval.sh
+```
+
+This also records the evaluator output under `examples/eval_records/latest/` for easier parity-gap triage and regression tracking.
+
+Manual (refresh + eval only):
+
+```bash
 scripts/run_examples.sh
 uv run --project tools/example_eval example-eval evaluate --repo-root .
+python3 scripts/example_eval_record.py --repo-root .
 ```
