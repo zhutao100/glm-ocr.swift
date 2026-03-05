@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-03-06T04:20:18Z",
+  "git_head_sha": "61bfda2c351255376e7612ee4c00cfcae9c447ea",
+  "fingerprint_sha256": "a66f37f1a16fe82fd559a5e3a3030fc17d4e2091d896888a85925ab805ca1a6e",
+  "fingerprint_paths": [
+    "Package.swift",
+    "Package.resolved",
+    "Sources",
+    "scripts/run_examples.sh",
+    "scripts/build_mlx_metallib.sh",
+    "examples/source"
+  ],
+  "configuration": "release",
+  "clean": true,
+  "parse_exit_code": 0
+}

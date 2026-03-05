@@ -1,0 +1,325 @@
+{
+  "name": "code",
+  "parity": {
+    "available": true,
+    "overall": 0.945,
+    "dimensions": {
+      "text_fidelity": 0.9248,
+      "critical_structure": 0.979,
+      "decorative_style": 0.95
+    },
+    "details": {
+      "text": {
+        "blocks": [
+          {
+            "index": 0,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 1.0
+          },
+          {
+            "index": 1,
+            "status": "paired",
+            "actual_kind": "code",
+            "expected_kind": "code",
+            "score": 1.0
+          },
+          {
+            "index": 2,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 1.0
+          },
+          {
+            "index": 3,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 0.9538
+          },
+          {
+            "index": 4,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 0.7746
+          },
+          {
+            "index": 5,
+            "status": "paired",
+            "actual_kind": "code",
+            "expected_kind": "code",
+            "score": 0.2911
+          }
+        ],
+        "aligned_score": 0.82190557250229,
+        "global_score": 0.9505266517714651
+      },
+      "tables": {
+        "tables": []
+      },
+      "json": {
+        "available": true,
+        "components": {
+          "page_count": 1.0,
+          "block_count": 1.0,
+          "labels": 1.0,
+          "bbox": 0.9083333333333333,
+          "content": 0.941852512483707
+        },
+        "pages": [
+          {
+            "page": 1,
+            "block_count": 1.0,
+            "labels": 1.0,
+            "bbox": 0.9083,
+            "content": 0.9419
+          }
+        ]
+      },
+      "style": {
+        "actual": {
+          "heading_levels": [],
+          "bold_markers": 0,
+          "center_wrappers": 0,
+          "code_languages": [
+            "xml",
+            "xml"
+          ]
+        },
+        "expected": {
+          "heading_levels": [],
+          "bold_markers": 0,
+          "center_wrappers": 0,
+          "code_languages": [
+            "html",
+            "html"
+          ]
+        }
+      },
+      "block_shape": 1.0
+    },
+    "missing_reason": null
+  },
+  "result_to_golden": {
+    "available": true,
+    "overall": 0.7244,
+    "dimensions": {
+      "text_fidelity": 0.7223,
+      "critical_structure": null,
+      "decorative_style": 0.75
+    },
+    "details": {
+      "text": {
+        "blocks": [
+          {
+            "index": 0,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 0.1084
+          },
+          {
+            "index": 1,
+            "status": "paired",
+            "actual_kind": "code",
+            "expected_kind": "paragraph",
+            "score": 0.0
+          },
+          {
+            "index": 2,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 0.3571
+          },
+          {
+            "index": 3,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "code",
+            "score": 0.0
+          },
+          {
+            "index": 4,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 0.1562
+          },
+          {
+            "index": 5,
+            "status": "paired",
+            "actual_kind": "code",
+            "expected_kind": "paragraph",
+            "score": 0.0156
+          },
+          {
+            "index": 6,
+            "status": "missing",
+            "kind": "paragraph",
+            "score": 0.0
+          },
+          {
+            "index": 7,
+            "status": "missing",
+            "kind": "code",
+            "score": 0.0
+          },
+          {
+            "index": 8,
+            "status": "missing",
+            "kind": "paragraph",
+            "score": 0.0
+          }
+        ],
+        "aligned_score": 0.06708164077015669,
+        "global_score": 0.88606096478248
+      },
+      "tables": {
+        "tables": []
+      },
+      "json": {
+        "available": false,
+        "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/code/code.json"
+      },
+      "style": {
+        "actual": {
+          "heading_levels": [],
+          "bold_markers": 0,
+          "center_wrappers": 0,
+          "code_languages": [
+            "xml",
+            "xml"
+          ]
+        },
+        "expected": {
+          "heading_levels": [],
+          "bold_markers": 1,
+          "center_wrappers": 0,
+          "code_languages": [
+            "xml",
+            "xml"
+          ]
+        }
+      },
+      "block_shape": 0.3333333333333333
+    },
+    "missing_reason": null
+  },
+  "reference_to_golden": {
+    "available": true,
+    "overall": 0.727,
+    "dimensions": {
+      "text_fidelity": 0.7292,
+      "critical_structure": null,
+      "decorative_style": 0.7
+    },
+    "details": {
+      "text": {
+        "blocks": [
+          {
+            "index": 0,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 0.1084
+          },
+          {
+            "index": 1,
+            "status": "paired",
+            "actual_kind": "code",
+            "expected_kind": "paragraph",
+            "score": 0.0
+          },
+          {
+            "index": 2,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 0.3571
+          },
+          {
+            "index": 3,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "code",
+            "score": 0.0
+          },
+          {
+            "index": 4,
+            "status": "paired",
+            "actual_kind": "paragraph",
+            "expected_kind": "paragraph",
+            "score": 0.1661
+          },
+          {
+            "index": 5,
+            "status": "paired",
+            "actual_kind": "code",
+            "expected_kind": "paragraph",
+            "score": 0.0159
+          },
+          {
+            "index": 6,
+            "status": "missing",
+            "kind": "paragraph",
+            "score": 0.0
+          },
+          {
+            "index": 7,
+            "status": "missing",
+            "kind": "code",
+            "score": 0.0
+          },
+          {
+            "index": 8,
+            "status": "missing",
+            "kind": "paragraph",
+            "score": 0.0
+          }
+        ],
+        "aligned_score": 0.06816376716069497,
+        "global_score": 0.8944543828264758
+      },
+      "tables": {
+        "tables": []
+      },
+      "json": {
+        "available": false,
+        "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/code/code.json"
+      },
+      "style": {
+        "actual": {
+          "heading_levels": [],
+          "bold_markers": 0,
+          "center_wrappers": 0,
+          "code_languages": [
+            "html",
+            "html"
+          ]
+        },
+        "expected": {
+          "heading_levels": [],
+          "bold_markers": 1,
+          "center_wrappers": 0,
+          "code_languages": [
+            "xml",
+            "xml"
+          ]
+        }
+      },
+      "block_shape": 0.3333333333333333
+    },
+    "missing_reason": null
+  },
+  "final_dimensions": {
+    "text_fidelity": 0.9248,
+    "critical_structure": 0.979,
+    "decorative_style": 0.9625
+  },
+  "final_overall": 0.9457,
+  "rules": []
+}

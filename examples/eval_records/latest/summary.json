@@ -1,0 +1,3815 @@
+{
+  "fail_under": null,
+  "examples": [
+    {
+      "name": "GLM-4.5V_Page_1",
+      "parity": {
+        "available": true,
+        "overall": 0.857,
+        "dimensions": {
+          "text_fidelity": 0.9086,
+          "critical_structure": 0.7838,
+          "decorative_style": 0.75
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "heading",
+                "score": 0.0265
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0528
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "heading",
+                "score": 0.0
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0182
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0541
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0992
+              },
+              {
+                "index": 11,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 12,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 13,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 14,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 15,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 16,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 17,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.013922728298442212,
+            "global_score": 0.9556650246305419
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": true,
+            "components": {
+              "page_count": 1.0,
+              "block_count": 1.0,
+              "labels": 1.0,
+              "bbox": 0.953030303030303,
+              "content": 0.8123293015996879
+            },
+            "pages": [
+              {
+                "page": 1,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.953,
+                "content": 0.8123
+              }
+            ]
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [
+                1,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [
+                1,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 4,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.3888888888888889
+        },
+        "missing_reason": null
+      },
+      "result_to_golden": {
+        "available": false,
+        "overall": null,
+        "dimensions": {
+          "text_fidelity": null,
+          "critical_structure": null,
+          "decorative_style": null
+        },
+        "details": {},
+        "missing_reason": "missing markdown: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/GLM-4.5V_Page_1/GLM-4.5V_Page_1.md (missing)"
+      },
+      "reference_to_golden": {
+        "available": false,
+        "overall": null,
+        "dimensions": {
+          "text_fidelity": null,
+          "critical_structure": null,
+          "decorative_style": null
+        },
+        "details": {},
+        "missing_reason": "missing markdown: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/GLM-4.5V_Page_1/GLM-4.5V_Page_1.md (missing)"
+      },
+      "final_dimensions": {
+        "text_fidelity": 0.9086,
+        "critical_structure": 0.7838,
+        "decorative_style": 0.75
+      },
+      "final_overall": 0.857,
+      "rules": []
+    },
+    {
+      "name": "GLM-4.5V_Pages_1_2_3",
+      "parity": {
+        "available": true,
+        "overall": 0.8739,
+        "dimensions": {
+          "text_fidelity": 0.9381,
+          "critical_structure": 0.7816,
+          "decorative_style": 0.75
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "heading",
+                "score": 0.0265
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0528
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "heading",
+                "score": 0.0
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0182
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0541
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0992
+              },
+              {
+                "index": 11,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 12,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0066
+              },
+              {
+                "index": 13,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 14,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0174
+              },
+              {
+                "index": 15,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 16,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 17,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.2197
+              },
+              {
+                "index": 18,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 19,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "heading",
+                "score": 0.0186
+              },
+              {
+                "index": 20,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.021
+              },
+              {
+                "index": 21,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.2166
+              },
+              {
+                "index": 22,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.132
+              },
+              {
+                "index": 23,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.1071
+              },
+              {
+                "index": 24,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "list_item",
+                "score": 0.0216
+              },
+              {
+                "index": 25,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.1162
+              },
+              {
+                "index": 26,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0954
+              },
+              {
+                "index": 27,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "list_item",
+                "score": 0.0111
+              },
+              {
+                "index": 28,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.0386
+              },
+              {
+                "index": 29,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "list_item",
+                "score": 0.0131
+              },
+              {
+                "index": 30,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.1416
+              },
+              {
+                "index": 31,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.1419
+              },
+              {
+                "index": 32,
+                "status": "missing",
+                "kind": "heading",
+                "score": 0.0
+              },
+              {
+                "index": 33,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 34,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 35,
+                "status": "missing",
+                "kind": "formula",
+                "score": 0.0
+              },
+              {
+                "index": 36,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 37,
+                "status": "missing",
+                "kind": "formula",
+                "score": 0.0
+              },
+              {
+                "index": 38,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 39,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.038628606773285626,
+            "global_score": 0.9854304635761589
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": true,
+            "components": {
+              "page_count": 1.0,
+              "block_count": 1.0,
+              "labels": 1.0,
+              "bbox": 0.952994227994228,
+              "content": 0.9333901658449015
+            },
+            "pages": [
+              {
+                "page": 1,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.953,
+                "content": 0.8123
+              },
+              {
+                "page": 2,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.95,
+                "content": 0.997
+              },
+              {
+                "page": 3,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.956,
+                "content": 0.9908
+              }
+            ]
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [
+                1,
+                2,
+                2,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [
+                1,
+                2,
+                2,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 4,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.325
+        },
+        "missing_reason": null
+      },
+      "result_to_golden": {
+        "available": true,
+        "overall": 0.8786,
+        "dimensions": {
+          "text_fidelity": 0.9119,
+          "critical_structure": null,
+          "decorative_style": 0.4792
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "heading",
+                "score": 0.0265
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "heading",
+                "score": 0.0
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0182
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0541
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0992
+              },
+              {
+                "index": 11,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 12,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0066
+              },
+              {
+                "index": 13,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 14,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0174
+              },
+              {
+                "index": 15,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 16,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 17,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.2197
+              },
+              {
+                "index": 18,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 19,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 20,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 21,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "heading",
+                "score": 0.0176
+              },
+              {
+                "index": 22,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.1204
+              },
+              {
+                "index": 23,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.1395
+              },
+              {
+                "index": 24,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.005
+              },
+              {
+                "index": 25,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.1084
+              },
+              {
+                "index": 26,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.1259
+              },
+              {
+                "index": 27,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "list_item",
+                "score": 0.0041
+              },
+              {
+                "index": 28,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.0947
+              },
+              {
+                "index": 29,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "list_item",
+                "score": 0.0233
+              },
+              {
+                "index": 30,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0496
+              },
+              {
+                "index": 31,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.2088
+              },
+              {
+                "index": 32,
+                "status": "missing",
+                "kind": "list_item",
+                "score": 0.0
+              },
+              {
+                "index": 33,
+                "status": "missing",
+                "kind": "list_item",
+                "score": 0.0
+              },
+              {
+                "index": 34,
+                "status": "missing",
+                "kind": "heading",
+                "score": 0.0
+              },
+              {
+                "index": 35,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 36,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 37,
+                "status": "missing",
+                "kind": "formula",
+                "score": 0.0
+              },
+              {
+                "index": 38,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 39,
+                "status": "missing",
+                "kind": "formula",
+                "score": 0.0
+              },
+              {
+                "index": 40,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 41,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.03144313490286777,
+            "global_score": 0.9582596391934913
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/GLM-4.5V_Pages_1_2_3/GLM-4.5V_Pages_1_2_3.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [
+                1,
+                2,
+                2,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [
+                1,
+                3,
+                2,
+                2
+              ],
+              "bold_markers": 32,
+              "center_wrappers": 4,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.3333333333333333
+        },
+        "missing_reason": null
+      },
+      "reference_to_golden": {
+        "available": true,
+        "overall": 0.923,
+        "dimensions": {
+          "text_fidelity": 0.9391,
+          "critical_structure": null,
+          "decorative_style": 0.7292
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "heading",
+                "score": 1.0
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "heading",
+                "score": 1.0
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9964
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 11,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 12,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 13,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 14,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 15,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 16,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 17,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9835
+              },
+              {
+                "index": 18,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 19,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 20,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 21,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "heading",
+                "score": 0.0091
+              },
+              {
+                "index": 22,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.3491
+              },
+              {
+                "index": 23,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0944
+              },
+              {
+                "index": 24,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.1031
+              },
+              {
+                "index": 25,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.1562
+              },
+              {
+                "index": 26,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.1315
+              },
+              {
+                "index": 27,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "list_item",
+                "score": 0.1957
+              },
+              {
+                "index": 28,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "list_item",
+                "score": 0.0258
+              },
+              {
+                "index": 29,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "list_item",
+                "score": 0.1796
+              },
+              {
+                "index": 30,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0546
+              },
+              {
+                "index": 31,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "list_item",
+                "score": 0.3159
+              },
+              {
+                "index": 32,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "list_item",
+                "score": 0.0211
+              },
+              {
+                "index": 33,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.2014
+              },
+              {
+                "index": 34,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "heading",
+                "score": 0.0107
+              },
+              {
+                "index": 35,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0068
+              },
+              {
+                "index": 36,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.2794
+              },
+              {
+                "index": 37,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.1661
+              },
+              {
+                "index": 38,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.2213
+              },
+              {
+                "index": 39,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "formula",
+                "score": 0.0124
+              },
+              {
+                "index": 40,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 41,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.4167074345174426,
+            "global_score": 0.9666136724960254
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/GLM-4.5V_Pages_1_2_3/GLM-4.5V_Pages_1_2_3.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [
+                1,
+                2,
+                2,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 4,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [
+                1,
+                3,
+                2,
+                2
+              ],
+              "bold_markers": 32,
+              "center_wrappers": 4,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.6904761904761905
+        },
+        "missing_reason": null
+      },
+      "final_dimensions": {
+        "text_fidelity": 0.9313,
+        "critical_structure": 0.7816,
+        "decorative_style": 0.6875
+      },
+      "final_overall": 0.8667,
+      "rules": [
+        {
+          "check_id": "page1_start",
+          "check_type": "page_start",
+          "status": "pass",
+          "severity": "warn",
+          "message": "Page 1 start matched expected content."
+        },
+        {
+          "check_id": "page1_end",
+          "check_type": "page_end",
+          "status": "pass",
+          "severity": "warn",
+          "message": "Page 1 end matched expected content."
+        },
+        {
+          "check_id": "page2_start",
+          "check_type": "page_start",
+          "status": "pass",
+          "severity": "warn",
+          "message": "Page 2 start matched expected content."
+        },
+        {
+          "check_id": "page2_end",
+          "check_type": "page_end",
+          "status": "pass",
+          "severity": "warn",
+          "message": "Page 2 end matched expected content."
+        },
+        {
+          "check_id": "page3_start",
+          "check_type": "page_start",
+          "status": "pass",
+          "severity": "warn",
+          "message": "Page 3 start matched expected content."
+        },
+        {
+          "check_id": "page3_end",
+          "check_type": "page_end",
+          "status": "pass",
+          "severity": "warn",
+          "message": "Page 3 end matched expected content."
+        },
+        {
+          "check_id": "page2_page3_continuation",
+          "check_type": "continuation",
+          "status": "pass",
+          "severity": "warn",
+          "message": "Continuation across pages 2 -> 3 matched."
+        }
+      ]
+    },
+    {
+      "name": "code",
+      "parity": {
+        "available": true,
+        "overall": 0.945,
+        "dimensions": {
+          "text_fidelity": 0.9248,
+          "critical_structure": 0.979,
+          "decorative_style": 0.95
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "code",
+                "expected_kind": "code",
+                "score": 1.0
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9538
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.7746
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "code",
+                "expected_kind": "code",
+                "score": 0.2911
+              }
+            ],
+            "aligned_score": 0.82190557250229,
+            "global_score": 0.9505266517714651
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": true,
+            "components": {
+              "page_count": 1.0,
+              "block_count": 1.0,
+              "labels": 1.0,
+              "bbox": 0.9083333333333333,
+              "content": 0.941852512483707
+            },
+            "pages": [
+              {
+                "page": 1,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.9083,
+                "content": 0.9419
+              }
+            ]
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": [
+                "xml",
+                "xml"
+              ]
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": [
+                "html",
+                "html"
+              ]
+            }
+          },
+          "block_shape": 1.0
+        },
+        "missing_reason": null
+      },
+      "result_to_golden": {
+        "available": true,
+        "overall": 0.7244,
+        "dimensions": {
+          "text_fidelity": 0.7223,
+          "critical_structure": null,
+          "decorative_style": 0.75
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.1084
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "code",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.3571
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "code",
+                "score": 0.0
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.1562
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "code",
+                "expected_kind": "paragraph",
+                "score": 0.0156
+              },
+              {
+                "index": 6,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 7,
+                "status": "missing",
+                "kind": "code",
+                "score": 0.0
+              },
+              {
+                "index": 8,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.06708164077015669,
+            "global_score": 0.88606096478248
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/code/code.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": [
+                "xml",
+                "xml"
+              ]
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 1,
+              "center_wrappers": 0,
+              "code_languages": [
+                "xml",
+                "xml"
+              ]
+            }
+          },
+          "block_shape": 0.3333333333333333
+        },
+        "missing_reason": null
+      },
+      "reference_to_golden": {
+        "available": true,
+        "overall": 0.727,
+        "dimensions": {
+          "text_fidelity": 0.7292,
+          "critical_structure": null,
+          "decorative_style": 0.7
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.1084
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "code",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.3571
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "code",
+                "score": 0.0
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.1661
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "code",
+                "expected_kind": "paragraph",
+                "score": 0.0159
+              },
+              {
+                "index": 6,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 7,
+                "status": "missing",
+                "kind": "code",
+                "score": 0.0
+              },
+              {
+                "index": 8,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.06816376716069497,
+            "global_score": 0.8944543828264758
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/code/code.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": [
+                "html",
+                "html"
+              ]
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 1,
+              "center_wrappers": 0,
+              "code_languages": [
+                "xml",
+                "xml"
+              ]
+            }
+          },
+          "block_shape": 0.3333333333333333
+        },
+        "missing_reason": null
+      },
+      "final_dimensions": {
+        "text_fidelity": 0.9248,
+        "critical_structure": 0.979,
+        "decorative_style": 0.9625
+      },
+      "final_overall": 0.9457,
+      "rules": []
+    },
+    {
+      "name": "handwritten",
+      "parity": {
+        "available": true,
+        "overall": 0.987,
+        "dimensions": {
+          "text_fidelity": 0.9826,
+          "critical_structure": 0.9927,
+          "decorative_style": 1.0
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9688
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9717
+              }
+            ],
+            "aligned_score": 0.9851120283018868,
+            "global_score": 0.9824561403508771
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": true,
+            "components": {
+              "page_count": 1.0,
+              "block_count": 1.0,
+              "labels": 1.0,
+              "bbox": 0.9625,
+              "content": 0.9851120283018868
+            },
+            "pages": [
+              {
+                "page": 1,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.9625,
+                "content": 0.9851
+              }
+            ]
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 1.0
+        },
+        "missing_reason": null
+      },
+      "result_to_golden": {
+        "available": true,
+        "overall": 0.9706,
+        "dimensions": {
+          "text_fidelity": 0.9681,
+          "critical_structure": null,
+          "decorative_style": 1.0
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.4486
+              },
+              {
+                "index": 2,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 3,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.3621495327102804,
+            "global_score": 1.0
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/handwritten/handwritten.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.5
+        },
+        "missing_reason": null
+      },
+      "reference_to_golden": {
+        "available": true,
+        "overall": 0.955,
+        "dimensions": {
+          "text_fidelity": 0.9513,
+          "critical_structure": null,
+          "decorative_style": 1.0
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.4346
+              },
+              {
+                "index": 2,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 3,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.35864485981308414,
+            "global_score": 0.9824561403508771
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/handwritten/handwritten.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.5
+        },
+        "missing_reason": null
+      },
+      "final_dimensions": {
+        "text_fidelity": 0.9826,
+        "critical_structure": 0.9927,
+        "decorative_style": 1.0
+      },
+      "final_overall": 1.0,
+      "rules": [
+        {
+          "check_id": "corrected_phrase",
+          "check_type": "contains",
+          "status": "pass",
+          "severity": "warn",
+          "message": "Found required phrase for corrected_phrase."
+        }
+      ]
+    },
+    {
+      "name": "page",
+      "parity": {
+        "available": true,
+        "overall": 0.8467,
+        "dimensions": {
+          "text_fidelity": 0.8189,
+          "critical_structure": 0.8724,
+          "decorative_style": 1.0
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "heading",
+                "score": 1.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "list_item",
+                "score": 0.9123
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "list_item",
+                "score": 1.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9333
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.3717
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.2727
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.5283
+              },
+              {
+                "index": 11,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0444
+              },
+              {
+                "index": 12,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 13,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.0459
+              },
+              {
+                "index": 14,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "heading",
+                "score": 0.0
+              },
+              {
+                "index": 15,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "heading",
+                "score": 0.0
+              },
+              {
+                "index": 16,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "list_item",
+                "score": 0.0523
+              },
+              {
+                "index": 17,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "list_item",
+                "score": 0.1818
+              },
+              {
+                "index": 18,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0385
+              },
+              {
+                "index": 19,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "list_item",
+                "score": 0.0
+              },
+              {
+                "index": 20,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "list_item",
+                "score": 0.0
+              },
+              {
+                "index": 21,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "list_item",
+                "score": 0.0674
+              },
+              {
+                "index": 22,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 23,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "formula",
+                "score": 0.0
+              },
+              {
+                "index": 24,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.6818
+              },
+              {
+                "index": 25,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.6143
+              },
+              {
+                "index": 26,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.3314
+              },
+              {
+                "index": 27,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0523
+              },
+              {
+                "index": 28,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.3541179821254553,
+            "global_score": 0.8433635614179721
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": true,
+            "components": {
+              "page_count": 1.0,
+              "block_count": 1.0,
+              "labels": 1.0,
+              "bbox": 0.9238095238095239,
+              "content": 0.8300075431034462
+            },
+            "pages": [
+              {
+                "page": 1,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.9238,
+                "content": 0.83
+              }
+            ]
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [
+                2,
+                2,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [
+                2,
+                2,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.6896551724137931
+        },
+        "missing_reason": null
+      },
+      "result_to_golden": {
+        "available": true,
+        "overall": 0.5639,
+        "dimensions": {
+          "text_fidelity": 0.5617,
+          "critical_structure": null,
+          "decorative_style": 0.5909
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.5
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.661
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.7125
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9333
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.2824
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.2927
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.2549
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0727
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.3548
+              },
+              {
+                "index": 11,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0533
+              },
+              {
+                "index": 12,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 13,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0577
+              },
+              {
+                "index": 14,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0492
+              },
+              {
+                "index": 15,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 16,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 17,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0523
+              },
+              {
+                "index": 18,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0248
+              },
+              {
+                "index": 19,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.5091
+              },
+              {
+                "index": 20,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.3333
+              },
+              {
+                "index": 21,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.5051
+              },
+              {
+                "index": 22,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.5966
+              },
+              {
+                "index": 23,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.8718
+              },
+              {
+                "index": 24,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.2143
+              },
+              {
+                "index": 25,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.1752
+              },
+              {
+                "index": 26,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.2283
+              },
+              {
+                "index": 27,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.2043
+              },
+              {
+                "index": 28,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.8387
+              },
+              {
+                "index": 29,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.32594366650635653,
+            "global_score": 0.5740663029794377
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/page/page.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [
+                2,
+                2,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 34,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.4
+        },
+        "missing_reason": null
+      },
+      "reference_to_golden": {
+        "available": true,
+        "overall": 0.6078,
+        "dimensions": {
+          "text_fidelity": 0.6092,
+          "critical_structure": null,
+          "decorative_style": 0.5909
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.5
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.725
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.7125
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.2824
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.2927
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.6759
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.36
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.3077
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.3385
+              },
+              {
+                "index": 11,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.6496
+              },
+              {
+                "index": 12,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.8438
+              },
+              {
+                "index": 13,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.6078
+              },
+              {
+                "index": 14,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 15,
+                "status": "paired",
+                "actual_kind": "heading",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 16,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0165
+              },
+              {
+                "index": 17,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 18,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 19,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0465
+              },
+              {
+                "index": 20,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 21,
+                "status": "paired",
+                "actual_kind": "list_item",
+                "expected_kind": "paragraph",
+                "score": 0.0474
+              },
+              {
+                "index": 22,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 23,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 24,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.1679
+              },
+              {
+                "index": 25,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.122
+              },
+              {
+                "index": 26,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0771
+              },
+              {
+                "index": 27,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.1197
+              },
+              {
+                "index": 28,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 29,
+                "status": "missing",
+                "kind": "paragraph",
+                "score": 0.0
+              }
+            ],
+            "aligned_score": 0.2964219754301632,
+            "global_score": 0.6256662566625666
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/page/page.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [
+                2,
+                2,
+                2
+              ],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 34,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.36666666666666664
+        },
+        "missing_reason": null
+      },
+      "final_dimensions": {
+        "text_fidelity": 0.807,
+        "critical_structure": 0.8724,
+        "decorative_style": 1.0
+      },
+      "final_overall": 0.8396,
+      "rules": []
+    },
+    {
+      "name": "paper",
+      "parity": {
+        "available": true,
+        "overall": 0.9853,
+        "dimensions": {
+          "text_fidelity": 0.981,
+          "critical_structure": 0.9907,
+          "decorative_style": 1.0
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9646
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9627
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9782
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9883
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 11,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 12,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.8928
+              },
+              {
+                "index": 13,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 14,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9464
+              },
+              {
+                "index": 15,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 16,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9727
+              },
+              {
+                "index": 17,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9926
+              },
+              {
+                "index": 18,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 19,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 20,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 21,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 22,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              },
+              {
+                "index": 23,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 24,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9964
+              },
+              {
+                "index": 25,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.962
+              },
+              {
+                "index": 26,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9686
+              },
+              {
+                "index": 27,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.8
+              },
+              {
+                "index": 28,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 29,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 1.0
+              }
+            ],
+            "aligned_score": 0.9807568457242649,
+            "global_score": 0.9810034096444228
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": true,
+            "components": {
+              "page_count": 1.0,
+              "block_count": 1.0,
+              "labels": 1.0,
+              "bbox": 0.9522222222222222,
+              "content": 0.9815547795752239
+            },
+            "pages": [
+              {
+                "page": 1,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.9522,
+                "content": 0.9816
+              }
+            ]
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 1.0
+        },
+        "missing_reason": null
+      },
+      "result_to_golden": {
+        "available": true,
+        "overall": 0.7058,
+        "dimensions": {
+          "text_fidelity": 0.7021,
+          "critical_structure": null,
+          "decorative_style": 0.75
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.2805
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0063
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.2798
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.1257
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "formula",
+                "score": 0.0061
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0835
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.1968
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.062
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0784
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 11,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0163
+              },
+              {
+                "index": 12,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0627
+              },
+              {
+                "index": 13,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0725
+              },
+              {
+                "index": 14,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0718
+              },
+              {
+                "index": 15,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0524
+              },
+              {
+                "index": 16,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.7385
+              },
+              {
+                "index": 17,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.7762
+              },
+              {
+                "index": 18,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.1558
+              },
+              {
+                "index": 19,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 20,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.3333
+              },
+              {
+                "index": 21,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9254
+              },
+              {
+                "index": 22,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.3229
+              },
+              {
+                "index": 23,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 24,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.878
+              },
+              {
+                "index": 25,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.4371
+              },
+              {
+                "index": 26,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.8451
+              },
+              {
+                "index": 27,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.2473
+              },
+              {
+                "index": 28,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 29,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.384
+              }
+            ],
+            "aligned_score": 0.34685377196119543,
+            "global_score": 0.7208265802269044
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/paper/paper.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 16,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.6666666666666666
+        },
+        "missing_reason": null
+      },
+      "reference_to_golden": {
+        "available": true,
+        "overall": 0.709,
+        "dimensions": {
+          "text_fidelity": 0.7055,
+          "critical_structure": null,
+          "decorative_style": 0.75
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.2805
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0063
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.2932
+              },
+              {
+                "index": 4,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.1257
+              },
+              {
+                "index": 5,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "formula",
+                "score": 0.0061
+              },
+              {
+                "index": 6,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0824
+              },
+              {
+                "index": 7,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.1964
+              },
+              {
+                "index": 8,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.062
+              },
+              {
+                "index": 9,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0784
+              },
+              {
+                "index": 10,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0
+              },
+              {
+                "index": 11,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0163
+              },
+              {
+                "index": 12,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0688
+              },
+              {
+                "index": 13,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.0725
+              },
+              {
+                "index": 14,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0435
+              },
+              {
+                "index": 15,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.0524
+              },
+              {
+                "index": 16,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.7296
+              },
+              {
+                "index": 17,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.7773
+              },
+              {
+                "index": 18,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.1558
+              },
+              {
+                "index": 19,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 20,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.3333
+              },
+              {
+                "index": 21,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.9254
+              },
+              {
+                "index": 22,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.3229
+              },
+              {
+                "index": 23,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 24,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.875
+              },
+              {
+                "index": 25,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.4706
+              },
+              {
+                "index": 26,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 0.8462
+              },
+              {
+                "index": 27,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "paragraph",
+                "score": 0.3375
+              },
+              {
+                "index": 28,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 29,
+                "status": "paired",
+                "actual_kind": "formula",
+                "expected_kind": "formula",
+                "score": 0.384
+              }
+            ],
+            "aligned_score": 0.35027493313798214,
+            "global_score": 0.7242464224094184
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/paper/paper.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 16,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 0.6666666666666666
+        },
+        "missing_reason": null
+      },
+      "final_dimensions": {
+        "text_fidelity": 0.981,
+        "critical_structure": 0.9907,
+        "decorative_style": 1.0
+      },
+      "final_overall": 0.9853,
+      "rules": []
+    },
+    {
+      "name": "seal",
+      "parity": {
+        "available": true,
+        "overall": 0.9894,
+        "dimensions": {
+          "text_fidelity": 1.0,
+          "critical_structure": 0.9697,
+          "decorative_style": 1.0
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              }
+            ],
+            "aligned_score": 1.0,
+            "global_score": 1.0
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": true,
+            "components": {
+              "page_count": 1.0,
+              "block_count": 1.0,
+              "labels": 1.0,
+              "bbox": 0.7833333333333333,
+              "content": 1.0
+            },
+            "pages": [
+              {
+                "page": 1,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.7833,
+                "content": 1.0
+              }
+            ]
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 1.0
+        },
+        "missing_reason": null
+      },
+      "result_to_golden": {
+        "available": true,
+        "overall": 0.9808,
+        "dimensions": {
+          "text_fidelity": 1.0,
+          "critical_structure": null,
+          "decorative_style": 0.75
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              }
+            ],
+            "aligned_score": 1.0,
+            "global_score": 1.0
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/seal/seal.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 8,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 1.0
+        },
+        "missing_reason": null
+      },
+      "reference_to_golden": {
+        "available": true,
+        "overall": 0.9808,
+        "dimensions": {
+          "text_fidelity": 1.0,
+          "critical_structure": null,
+          "decorative_style": 0.75
+        },
+        "details": {
+          "text": {
+            "blocks": [
+              {
+                "index": 0,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 1,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 2,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              },
+              {
+                "index": 3,
+                "status": "paired",
+                "actual_kind": "paragraph",
+                "expected_kind": "paragraph",
+                "score": 1.0
+              }
+            ],
+            "aligned_score": 1.0,
+            "global_score": 1.0
+          },
+          "tables": {
+            "tables": []
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/seal/seal.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 8,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 1.0
+        },
+        "missing_reason": null
+      },
+      "final_dimensions": {
+        "text_fidelity": 1.0,
+        "critical_structure": 0.9697,
+        "decorative_style": 1.0
+      },
+      "final_overall": 0.9894,
+      "rules": []
+    },
+    {
+      "name": "table",
+      "parity": {
+        "available": true,
+        "overall": 0.9987,
+        "dimensions": {
+          "text_fidelity": 1.0,
+          "critical_structure": 0.9964,
+          "decorative_style": 1.0
+        },
+        "details": {
+          "text": {
+            "blocks": [],
+            "aligned_score": null,
+            "global_score": 1.0
+          },
+          "tables": {
+            "tables": [
+              {
+                "index": 0,
+                "score": 1.0,
+                "subscores": {
+                  "shape": 1.0,
+                  "content": 1.0
+                }
+              }
+            ]
+          },
+          "json": {
+            "available": true,
+            "components": {
+              "page_count": 1.0,
+              "block_count": 1.0,
+              "labels": 1.0,
+              "bbox": 0.9666666666666667,
+              "content": 0.981491867638811
+            },
+            "pages": [
+              {
+                "page": 1,
+                "block_count": 1.0,
+                "labels": 1.0,
+                "bbox": 0.9667,
+                "content": 0.9815
+              }
+            ]
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 1.0
+        },
+        "missing_reason": null
+      },
+      "result_to_golden": {
+        "available": true,
+        "overall": 1.0,
+        "dimensions": {
+          "text_fidelity": 1.0,
+          "critical_structure": 1.0,
+          "decorative_style": 1.0
+        },
+        "details": {
+          "text": {
+            "blocks": [],
+            "aligned_score": null,
+            "global_score": 1.0
+          },
+          "tables": {
+            "tables": [
+              {
+                "index": 0,
+                "score": 1.0,
+                "subscores": {
+                  "shape": 1.0,
+                  "content": 1.0
+                }
+              }
+            ]
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/table/table.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 1.0
+        },
+        "missing_reason": null
+      },
+      "reference_to_golden": {
+        "available": true,
+        "overall": 1.0,
+        "dimensions": {
+          "text_fidelity": 1.0,
+          "critical_structure": 1.0,
+          "decorative_style": 1.0
+        },
+        "details": {
+          "text": {
+            "blocks": [],
+            "aligned_score": null,
+            "global_score": 1.0
+          },
+          "tables": {
+            "tables": [
+              {
+                "index": 0,
+                "score": 1.0,
+                "subscores": {
+                  "shape": 1.0,
+                  "content": 1.0
+                }
+              }
+            ]
+          },
+          "json": {
+            "available": false,
+            "reason": "missing json baseline or result: /Users/taozhu/workspace/vlm-ocr/glm-ocr.swift/examples/golden_result/table/table.json"
+          },
+          "style": {
+            "actual": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            },
+            "expected": {
+              "heading_levels": [],
+              "bold_markers": 0,
+              "center_wrappers": 0,
+              "code_languages": []
+            }
+          },
+          "block_shape": 1.0
+        },
+        "missing_reason": null
+      },
+      "final_dimensions": {
+        "text_fidelity": 1.0,
+        "critical_structure": 0.9964,
+        "decorative_style": 1.0
+      },
+      "final_overall": 0.9987,
+      "rules": []
+    }
+  ]
+}
