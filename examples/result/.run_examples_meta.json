@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-03-06T04:20:18Z",
-  "git_head_sha": "61bfda2c351255376e7612ee4c00cfcae9c447ea",
-  "fingerprint_sha256": "a66f37f1a16fe82fd559a5e3a3030fc17d4e2091d896888a85925ab805ca1a6e",
+  "generated_at": "2026-03-17T18:51:40Z",
+  "git_head_sha": "20c4fb0184085388e29f0bc4a680f7c0160c9b72",
+  "fingerprint_sha256": "6251d1103bea963ea8846da62c7307f1867edc57c03d32a34a2787c7cd9149bb",
   "fingerprint_paths": [
     "Package.swift",
     "Package.resolved",

@@ -10,22 +10,22 @@
       "scripts/build_mlx_metallib.sh",
       "examples/source"
     ],
-    "fingerprint_sha256": "a66f37f1a16fe82fd559a5e3a3030fc17d4e2091d896888a85925ab805ca1a6e",
-    "generated_at": "2026-03-06T04:20:18Z",
-    "git_head_sha": "61bfda2c351255376e7612ee4c00cfcae9c447ea",
+    "fingerprint_sha256": "6251d1103bea963ea8846da62c7307f1867edc57c03d32a34a2787c7cd9149bb",
+    "generated_at": "2026-03-17T18:51:40Z",
+    "git_head_sha": "20c4fb0184085388e29f0bc4a680f7c0160c9b72",
     "parse_exit_code": 0,
     "schema_version": 1
   },
-  "generated_at": "2026-03-06T04:21:05+00:00",
+  "generated_at": "2026-03-17T18:51:41+00:00",
   "git": {
-    "describe": "3e16b85",
+    "describe": "20c4fb0",
     "dirty": false,
-    "head_sha": "3e16b850cd7d576484fac60464ddf737b5b1f6b3"
+    "head_sha": "20c4fb0184085388e29f0bc4a680f7c0160c9b72"
   },
   "schema_version": 1,
   "tools": {
-    "example_eval_submodule_head_sha": "e363c3a49b3c322cda942641c0733c2b9d0b12d8",
-    "python": "3.13.9",
+    "example_eval_submodule_head_sha": "c404ee90cbd3de39b436e32ffbac031b606857b3",
+    "python": "3.14.2",
     "uv": "uv 0.9.14 (Homebrew 2025-12-01)"
   }
 }
